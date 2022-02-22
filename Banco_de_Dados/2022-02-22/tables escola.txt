@@ -1,0 +1,53 @@
+create database escola;
+
+create table professor(
+	codprofessor int(5) not null,
+	nome varchar(50) not null,
+	cidade varchar(50) not null,
+	estado char(2) not null,
+	telefone bigint(15) not null,
+	primary key (codprofessor),
+	foreign key (coddiscp) references curso (coddiscp)
+);
+
+create table curso(
+	codcurso int(5) not null,
+	nome varchar(50) not null,
+	primary key(codcurso),
+);
+
+create table aluno(
+	codaluno bigint(9) not null,
+	nome varchar(50) not null,
+	cidade varchar(50) not null,
+	estado char(2) not null,
+	telefone bigint(15),
+	primary key (codaluno),
+	foreign key (codcurso) references curso (codcurso),
+	foreign key (codturma) references turma (codturma)
+
+);
+
+create table turma(
+	codturma bigint(9) not null,
+	cidade varchar(50) not null,
+	estado char(2) not null,
+	primary key (codturma),
+	foreign key (codcurso) references curso (codcurso)
+);
+
+create table sala(
+	codsala bigint(9) not null,
+	cidade varchar(50) not null,
+	estado char(2) not null,
+	primary key (codsala),
+	foreign key (codcurso) references curso (codcurso)
+);
+
+create table disciplina(
+	coddiscip int(5) not null,
+	nome varchar(50) not null,
+	primary key (coddiscp),
+	foreign key (codcurso) references curso (codcurso)
+	
+);

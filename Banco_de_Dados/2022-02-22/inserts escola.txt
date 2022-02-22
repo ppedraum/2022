@@ -1,0 +1,59 @@
+insert into curso values (
+0001,'Informática' 
+);
+insert into curso values (
+0002,'Química' 
+);
+insert into curso values (
+0003,'Artes' 
+);
+
+insert into sala values (
+000000509,'Criciúma', 'SC', 0001
+);
+insert into sala values (
+000000510,'Criciúma', 'SC', 0002
+);
+insert into sala values (
+000000513,'Turvo', 'SC', 0003 
+);
+
+insert into professor values (
+00001,'Marcos', 'Criciúma', 'SC', 5548999094355, 00001
+);
+insert into professor values (
+00002,'José', 'Turvo', 'SC', 5548993854686, 00003
+);
+insert into professor values (
+00013,'Jacob', 'Recife', '81', 5581955447916, 00002
+);
+
+insert into turma values (
+000000023, 'Criciúma', 'SC', 0001
+);
+insert into turma values (
+000000223, 'Turvo', 'SC', 0003
+);
+insert into turma values (
+000005433, 'Criciúma', 'SC', 0002
+);
+
+insert into aluno values(
+000344211, 'Ronaldo Silva', 'Criciúma', 'SC', null, 0001, 000000023
+);
+insert into aluno values(
+000214211, 'Rormando Alves', 'Criciúma', 'SC', null, 0002, 000005433
+);
+insert into aluno values(
+000339856, 'Ana Pereira', 'Turvo', 'SC', null, 0003, 000000223
+);
+
+insert into disciplina values(
+00001, 'Análise de Sistemas', 0001
+);
+insert into disciplina values(
+00002, 'Compostos Inorgânicos', 0002
+);
+insert into disciplina values(
+00001, 'Teoria das Cores e Composição', 0003
+);
