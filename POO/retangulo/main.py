@@ -14,5 +14,6 @@ ret=Ret(10,10)
 
 print(ret.get_perimetro())
 print(ret.get_area())
-ret.set_valores(1,1)
+ret.set_valores(15124,1243)
 print(ret.get_area())
+ret.h=10000

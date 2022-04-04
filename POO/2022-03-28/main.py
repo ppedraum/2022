@@ -21,3 +21,13 @@ else:
   print("No match")
  """
 
+from carro import Moto, Veiculo
+
+honda=Moto(1, 'tipo1', 'honda', 'python2', 1977, 300)
+
+print(honda.__dict__)
+
+print('hello world') if isinstance(honda, int) else print('Não é moto')
+'''honda.cilindrada=10'''
+honda.alterar_cil(1000)
+print(honda.__dict__)

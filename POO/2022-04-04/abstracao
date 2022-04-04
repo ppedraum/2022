@@ -1,0 +1,15 @@
+Abstração: Definir um código de forma com que ele seja mais objetivo, ignorando conceitos desnecessários para o objetivo dele e 
+facilitando o uso caso for necessário usá-lo depois. A abstração também possui o encapsulamento como ponto importante, uma vez que 
+é necessário esconder os códigos mais complicados para deixar o resultado final mais limpo e organizado. Quanto maior a abstração, 
+mais fácil de ler
+
+Classe Abstrata: Uma classe que serve como molde para outras. Ela define funções genéricas que são implementadas em classes-filhas, 
+mas que não possuem nenhum uso inicialmente. Uma classe abstrata então não faz nada e não é instanceada. 
+
+Metaclasse: Classe que é utilizada para definir outra classe
+
+https://www.inf.pucrs.br/~gustavo/disciplinas/pli/material/paradigmas-aula03.pdf
+https://www.devmedia.com.br/abstracao-encapsulamento-e-heranca-pilares-da-poo-em-java/26366
+http://www.facom.ufu.br/~flavio/poo/files/2004-01/Poo-tad.pdf
+https://docs.python.org/pt-br/3/library/abc.html
+https://www.devmedia.com.br/polimorfismo-classes-abstratas-e-interfaces-fundamentos-da-poo-em-java/26387
