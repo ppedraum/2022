@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Alunos</title>
+</head>
+<body>
+    <form action="../php/cad_alunos.php" method="post">
+        Código: <input type="text" name="cod_aluno"><br>
+        Nome: <input type="text" name="nome_aluno"><br>
+        Endereço: <input type="text" name="endereco">
+        Telefone: <input type="text" name="telefone">
+        Sexo: <select name="sexo">
+            <option value="MASC">Masculino</option>
+            <option value="FEM">Feminino</option>
+            <option value="OUTRO">Outro</option>
+        </select><br>
+        Data de matrícula: <input type="date" name="dt_matricula"><br>
+        Data de nascimento: <input type="date" name="dt_nascimento"><br>
+        Altura: <input type="text" name="altura"><br>
+        Peso: <input type="text" name="peso"><br>
+
+        
+        <input type="submit" value='enviar' name='bt_enviar' id='bt_enviar'>
+        <input type="reset" name='bt_reset'>
+        <!-- <button name='bt_alterar'>Alterar</button> -->
+        <button name='bt_excluir'>Excluir</button>
+        <!--  <button name='bt_del_tudo' style='background-color: red; color: white; font-weight: bolder;'>NÃO CLIQUE AQUI</button> -->
+    </form>
+</body>
+</html>
