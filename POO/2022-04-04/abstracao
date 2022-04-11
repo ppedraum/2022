@@ -1,7 +1,5 @@
-Abstração: Definir um código de forma com que ele seja mais objetivo, ignorando conceitos desnecessários para o objetivo dele e 
-facilitando o uso caso for necessário usá-lo depois. A abstração também possui o encapsulamento como ponto importante, uma vez que 
-é necessário esconder os códigos mais complicados para deixar o resultado final mais limpo e organizado. Quanto maior a abstração, 
-mais fácil de ler
+Abstração: Definir um código ou linguagem de programação de forma com que ele seja mais objetivo, ignorando conceitos desnecessários 
+para o objetivo dele e facilitando o uso caso for necessário usá-lo depois. Quanto maior a abstração, mais fácil de ler.
 
 Classe Abstrata: Uma classe que serve como molde para outras. Ela define funções genéricas que são implementadas em classes-filhas, 
 mas que não possuem nenhum uso inicialmente. Uma classe abstrata então não faz nada e não é instanceada. 
