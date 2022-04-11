@@ -6,6 +6,18 @@ mas que não possuem nenhum uso inicialmente. Uma classe abstrata então não fa
 
 Metaclasse: Classe que é utilizada para definir outra classe
 
+
+Como Usar:
+
+Onde usar:
+    Em programações onde várias classes necessitam de métodos semelhantes obrigatórios, mas em um contexto onde não faz sentido
+    instancear a classe pai. Um exemplo são classes de diferentes tipos de funcionários de uma empresa, onde a class pai 'pessoa'
+    possui métodos comuns a todos mas não faz sentido ser instanceada sozinha.
+
+Por que usar:
+    Para deixar o código mais limpo e padronizado. Não necessariamente é algo obrigatório, mas é útil tanto como definir variáveis como
+    privadas, fazer encapsulamento, padronizar a sintaxe da programação.
+
 https://www.inf.pucrs.br/~gustavo/disciplinas/pli/material/paradigmas-aula03.pdf
 https://www.devmedia.com.br/abstracao-encapsulamento-e-heranca-pilares-da-poo-em-java/26366
 http://www.facom.ufu.br/~flavio/poo/files/2004-01/Poo-tad.pdf
