@@ -22,7 +22,9 @@ lista=Listbox(frame,
     height=10,
     bg='SystemButtonFace',
     bd=1,
-    fg='#1ecbe1')
+    fg='#1ecbe1'
+    highlightthickness=0
+    selectbackground='#fff')
 
 lista.pack()
 itens=['Olá', 'Mundo', '!', ':-P']
