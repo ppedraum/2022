@@ -5,7 +5,7 @@
     <title>Cadastro de Alunos</title>
 </head>
 <body>
-    <form action="../php/cad_alunos.php" method="post">
+    <form action="../php/cad_alunos.php" method="post" enctype="multipart/form-data">
         Código: <input type="text" name="cod_aluno"><br>
         Nome: <input type="text" name="nome_aluno"><br>
         Endereço: <input type="text" name="endereco">
@@ -19,6 +19,7 @@
         Data de nascimento: <input type="date" name="dt_nascimento"><br>
         Altura: <input type="text" name="altura"><br>
         Peso: <input type="text" name="peso"><br>
+        Foto: <input type="file" name="foto" id="foto" size=30><br>
 
         
         <input type="submit" value='enviar' name='bt_enviar' id='bt_enviar'>

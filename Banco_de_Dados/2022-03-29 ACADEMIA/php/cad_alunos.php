@@ -10,6 +10,22 @@ $dt_matricula=date( "Y-m-d", strtotime($_POST['dt_matricula']));
 $dt_nascimento=date( "Y-m-d", strtotime($_POST['dt_nascimento']));
 $altura=$_POST['altura'];
 $peso=$_POST['peso'];
+$foto_path = $pasta_dir.$foto["name"]; 
+
+//--------------------------------------------------//
+$foto = $_FILES['foto'];
+
+$pasta_dir = "../fotos/";
+
+ if(!file_exists($pasta_dir)){
+     mkdir($pasta_dir);
+ }
+
+ $foto_path = $pasta_dir.$foto["name"];
+
+ move_uploaded_file($foto["tmp_name"],$foto_path);
+
+//----------------------------------------------------//
 
 /* function connect($metodo, $tabela, array $valores){
     
@@ -26,7 +42,7 @@ echo "Conectado com sucesso! <br>";
 // Query baseada no botão apertado
 if(isset($_POST['bt_enviar'])){
     $query="insert into aluno values ('$cod_aluno', '$nome_aluno', '$endereco', '$telefone', '$sexo',
-                                      '$dt_matricula', '$dt_nascimento', '$altura', '$peso')";
+                                      '$dt_matricula', '$dt_nascimento', '$altura', '$peso', '$foto_path')";
     echo 'enviado';
 }elseif(isset($_POST['bt_excluir'])){
     $query='delete from aluno where codigo = '.$cod_aluno;
