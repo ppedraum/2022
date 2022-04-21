@@ -16,19 +16,25 @@ class Bloquinho:
         self.itens[numero-1].set_stat(True)
 
     def apagar_riscados(self):
-        i=0
-        while i<len(self.itens):
-            if self.itens[i].get_stat()==True:
-                del self.itens[i]
-            i+=1
-        # a estrutura FOR não aceita que mude a quantidade de itens de uma lista :-(, pois os
-        # números acabam não batendo
-
-    def get_itens(self):
-        lista=[]
+        riscados=[]
+        #pegar apenas os itens que foram riscados
         for i in range(len(self.itens)):
-            lista.append(str(i+1)+' - '+self.itens[i].get_titulo())
-        return lista
+            if self.itens[i].get_stat():
+                riscados.append(self.itens[i])
+        #o self.itens é agora a diferença entre si mesma e os riscados
+        self.itens = [i for i in self.itens if i not in riscados]
+            
+    def set_itens(self, itens):
+        self.itens = itens[:]
+
+    def get_itens(self, decor=False):
+        if decor:
+            lista=[]
+            for i in range(len(self.itens)):
+                lista.append(str(i+1)+' - '+self.itens[i].get_titulo())
+            return lista
+        else:
+            return self.itens
 
 class Item:
     def __init__(self, titulo):
@@ -50,42 +56,69 @@ class Request():
         self.bloco=bloco
         
     def comando(self, comm):
-        if 'del' in comm:
-            if 'riscados' in comm:
+        tipo=comm.split()[0]
+        arg=comm.split(' ', 1)[1]
+        if tipo=='del':
+            if arg=='riscados':
                 self.bloco.apagar_riscados()
+            elif arg=='*':
+                pass
             else:
-                self.bloco.excluir_item(self.take_numero(comm))
-        elif 'add' in comm:
-            self.bloco.add_item(input('Digite o input: '))
+                itens_exc=[]
+                arg=arg.split()
+                print(arg)
+                for i in arg:
+                    itens_exc.append(self.bloco.get_itens()[int(i)-1])
+                self.bloco.set_itens([i for i in bloco.get_itens() if i not in itens_exc])
+                
+        elif tipo=='add':
+            bloco.add_item(arg)
+            
         elif 'riscar' in comm:
-            self.bloco.riscar_item(self.take_numero(comm)) 
+            arg=arg.split()
+            for i in arg:
+                self.bloco.riscar_item(int(i)) 
+            
 
     def run(self):
         while True:
+            os.system('cls')
             qtd_itens = len(self.bloco.get_itens())
             print('-'*30)
             for i in range(qtd_itens):
-                print(self.bloco.get_itens()[i])
+                print(self.bloco.get_itens(1)[i])
             print('-'*30)
             req = input(':> ')
             self.comando(req)
-            print("\033[H\033[xJ", end="")
-        
-
-
+            
 
     def take_numero(self, comando):
-        numero=''
+        """ numero=''
         for i in comando:
             if i.isdigit():
                 numero += str(i)
-        return int(numero)
+        return int(numero) """
+        """ numero=[]
+        for i in comando:
+            numero.append(i)
+        comm=''.join(numero[:numero.index(' ')])
+        print(numero[numero.index(' ')+1:])
+        print(numero[numero.index(' ')+1:].index(' ')) """
+        numero=[]
+        numero=comando.split(' ', 1)
+        comm=numero[0]
+        arg=numero[1]
+        print(comm)
+        print(arg)
+        return numero
+
+        
         
 
 bloco = Bloquinho()
 app = Request(bloco)
 app.run()
-
+""" print(app.take_numero('add Macaquinho José')) """
 
 
 
