@@ -1,16 +1,17 @@
 insert into marca values
 (1, 'HONDA'), (2, 'CHEVROLET'), (3, 'VOLKSWAGGEN'), (4, 'CAOA CHERY'), (5, 'NISSAN'), (6, 'FORD'), (7, 'MERCEDES BENZ');
 
-insert into modelo values
-(1, 'CITY', '1'),  (2, 'FIT', '1'),  (3, 'WR-V', '1'),  (4, 'HR-V', '1'),  (5, 'CIVIC', '1'),  (6, 'ACCORD', '1'),  (7, 'CRV', '1'), 
-(1, 'ONIX', '2'),  (2, 'ONIX PLUS', '2'),  (3, 'CRUZE', '2'),  (4, 'CRUZE SPORT', '2'),  (5, 'TRACKER', '2'),  (6, 'SPIN', '2'),  (7, 'SPIN ACTIV', '2'), 
-(1, 'AMAROK', '3'),  (2, 'FOX', '3'),  (3, 'GOL', '3'),  (4, 'JETTA', '3'),  (5, 'NIVUS', '3'),  (6, 'POLO', '3'),  (7, 'SAVEIRO', '3'), 
-(1, 'TIGGO 7', '4'),  (2, 'ARRIZO 6', '4'),  (3, 'HD80', '4'),  (4, 'NEW AZERA', '4'),  (5, 'ALL NEW TUCSON', '4'),  (6, 'IX35', '4'),  (7, 'CRETA', '4'), 
-(1, 'ONIX', '5'),  (2, 'ONIX PLUS', '5'),  (3, 'CRUZE', '2'),  (4, 'CRUZE SPORT', '2'),  (5, 'TRACKER', '2'),  (6, 'SPIN', '2'),  (7, 'SPIN ACTIV', '2'), 
-(1, 'ONIX', '2'),  (2, 'ONIX PLUS', '2'),  (3, 'CRUZE', '2'),  (4, 'CRUZE SPORT', '2'),  (5, 'TRACKER', '2'),  (6, 'SPIN', '2'),  (7, 'SPIN ACTIV', '2'), 
-(1, 'ONIX', '2'),  (2, 'ONIX PLUS', '2'),  (3, 'CRUZE', '2'),  (4, 'CRUZE SPORT', '2'),  (5, 'TRACKER', '2'),  (6, 'SPIN', '2'),  (7, 'SPIN ACTIV', '2'), 
+insert into modelo (nome, codmarca) values
+('CITY', '1'),  ('FIT', '1'),  ('WR-V', '1'),  ('HR-V', '1'),  ('CIVIC', '1'),  ('ACCORD', '1'),  ('CRV', '1'), 
+('ONIX', '2'),  ('ONIX PLUS', '2'),  ('CRUZE', '2'),  ('CRUZE SPORT', '2'),  ('TRACKER', '2'),  ('SPIN', '2'),  ('SPIN ACTIV', '2'), 
+('AMAROK', '3'),  ('FOX', '3'),  ('GOL', '3'),  ('JETTA', '3'),  ('NIVUS', '3'),  ('POLO', '3'),  ('SAVEIRO', '3'), 
+('TIGGO 7', '4'),  ('ARRIZO 6', '4'),  ('HD80', '4'),  ('NEW AZERA', '4'),  ('ALL NEW TUCSON', '4'),  ('IX35', '4'),  ('CRETA', '4'), 
+('ONIX', '5'),  ('ONIX PLUS', '5'),  ('CRUZE', '2'),  ('CRUZE SPORT', '2'),  ('TRACKER', '2'),  ('SPIN', '2'),  ('SPIN ACTIV', '2'), 
+('ONIX', '2'),  ('ONIX PLUS', '2'),  ('CRUZE', '2'),  ('CRUZE SPORT', '2'),  ('TRACKER', '2'),  ('SPIN', '2'),  ('SPIN ACTIV', '2'), 
+('ONIX', '2'),  ('ONIX PLUS', '2'),  ('CRUZE', '2'),  ('CRUZE SPORT', '2'),  ('TRACKER', '2'),  ('SPIN', '2'),  (SPIN ACTIV', '2'); 
  
 
 insert into automovel values
-(1, 'CARRO', 1, 2004, 'preto', 123, 'rua caralho', 'GNV', 'ar-condicionado',
-20000.00);
+(1, 'carro', 1, 1, 2004, 'preto', 123, 'sei la', 'GNV', 'nada', 10000.00, '', '');
+
+select marca.nome as marca_nome, modelo.nome as modelo_nome, automovel.descricao, categoria.nome as categoria_nome from automovel, modelo, marca, categoria where $filtro.nome like '$pesquisa' and modelo.codmarca = marca.codmarca and automovel.codmodelo = modelo.codmodelo and automovel.codcategoria = categoria.codcategoria;
