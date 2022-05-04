@@ -2,13 +2,18 @@
 O NavigationContainer possui vários tipos de navegadores diferentes. Um deles é o StackNavigator, que usamos criando um objeto pelo método createNativeStackNavigator, e depois usando as propriedades Navigator (que controla a navegação) e screen (que é a tela navegável)
 */
 import * as React from 'react';
-import { View, Text, Button } from 'react-native';
+import { StyleSheet, View, Text, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+
+const styles = StyleSheet.create({
+  viewScreen: {flex: 1, justifyContent: 'center', alignItems: 'center' },
+});
+
 function HomeScreen({navigation}) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={styles.viewScreen}>
       <Text>Home Screen</Text>
       <Button
         title="Go to Details"
@@ -20,10 +25,10 @@ function HomeScreen({navigation}) {
 function DetailsScreen({navigation, route}) {
   const { num } = route.params;
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={styles.viewScreen}>
       <Text>Details Screen</Text>
       <Text>numero = {JSON.stringify(num)}</Text>
-      {/*É necessário usar o JSON, por algum motivo que não sei*/}
+      {/*É necessário usar o JSON para implementar deep linking e usar state persistence (pesquisar sobre)*/}
       <Button
         title="Go to Details... again"
         onPress={() => navigation.push('Details', {num: Math.floor(Math.random()*100)})} 
@@ -32,11 +37,14 @@ function DetailsScreen({navigation, route}) {
       <Button
         title="Go Back"
         onPress={() => navigation.goBack()}
+        //Ir para a nav anterior no Stack
       />
       <Button
         title="Go all the way back"
-        onPress={() => navigation.navigate('Home')} /*O push coloca a home na próxima posição do stack, e não voltando inicio de verdade*/
-      /*O navigation.popToPop() não está funfando aparentemente*/
+        onPress={() => navigation.navigate('Home')} //Navega para a home
+        //       () => navigation.popToTop() volta ao início do Stack
+
+      /*O push coloca a home na próxima posição do stack, e não voltando inicio de verdade*/
       />
     </View>
   );
@@ -53,7 +61,7 @@ function StackNav() {
         headerTitleStyle: {fontFamily: 'New Times Roman'}
       }}> 
 
-        <Stack.Screen name="Home" 
+        <Stack.Screen name="Home"
         component={HomeScreen} 
         options={{ title: 'Overview' }} /*Opções específicas para cada tela*/
         />
@@ -64,7 +72,7 @@ function StackNav() {
         options={{ 
           title: 'Details',
           headerStyle:{
-            backgroundColor:'#fff',
+            backgroundColor:'#1a1a1a',
           },
           headerTintColor: '#ffaaaa',
           headerTitleStyle: {
@@ -80,3 +88,4 @@ function StackNav() {
 }
 
 export default StackNav;
+

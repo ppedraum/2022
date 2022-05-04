@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script type="text/javascript">
+        window.onload = function() {
+            // create a couple of elements in an otherwise empty HTML page
+            const heading = document.createElement("h1");
+            const heading_text = document.createTextNode("Big Head!");
+            /* heading.appendChild(heading_text); */
+            document.body.appendChild(heading);
+            const a = [heading_text];
+            heading.appendChild(a[0]);
+        }
+    </script>
+
+</head>
+<body>
+    
+</body>
+</html>

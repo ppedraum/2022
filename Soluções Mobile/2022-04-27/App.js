@@ -6,8 +6,8 @@ import TabNav from './src/TabNav';
 function App() {
   return (
     <View style={styles.container}>
-      {/* <StackNav></StackNav> */}
-      <TabNav></TabNav>
+      <StackNav></StackNav>
+      {/* <TabNav></TabNav> */}
     </View>
   );
 }
@@ -20,3 +20,5 @@ const styles = StyleSheet.create({
   },
 });
 
+
+/* parei em: https://reactnavigation.org/docs/params */
