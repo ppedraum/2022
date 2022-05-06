@@ -5,8 +5,6 @@ require_once('datab.php');
 $filtro = $_POST['filtro'];
 $pesquisa = strtoupper($_POST['pesquisa']);
 
-connect();
-
 $query="select marca.nome as marca_nome, modelo.nome as modelo_nome, automovel.descricao, categoria.nome as categoria_nome from automovel, modelo, marca, categoria where 
 (marca.nome like '$pesquisa' or modelo.nome like '$pesquisa'  or categoria.nome like '$pesquisa'
 or CONCAT(marca.nome, ' ', modelo.nome) like '$pesquisa' or CONCAT(modelo.nome, ' ', marca.nome) like '$pesquisa') 
