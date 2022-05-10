@@ -12,29 +12,33 @@ $tipo_combustivel = $_POST['tipo_combustivel'];
 $opcionais = $_POST['opcionais'];
 $valor = $_POST['valor'];
 
+
+//setando o diretório pras fotos e criando uma pasta 'fotos' caso ela não exista
+$pasta_dir = "../fotos/";
+if(!file_exists($pasta_dir)){
+    mkdir($pasta_dir);
+}
+
 //--------------------------------------------------//
 $foto1 = $_FILES['foto1'];
 
-$pasta_dir = "../fotos/";
+if($foto1 != null)
+    $foto1_path = $pasta_dir.$foto1["name"];
+else
+    $foto1_path = 'no_photo';
 
- if(!file_exists($pasta_dir)){
-     mkdir($pasta_dir);
- }
-
- $foto1_path = $pasta_dir.$foto1["name"];
-
- move_uploaded_file($foto1["tmp_name"],$foto1_path);
+move_uploaded_file($foto1["tmp_name"],$foto1_path);
 
 //----------------------------------------------------//
 
 //--------------------------------------------------//
 $foto2 = $_FILES['foto2'];
 
- if(!file_exists($pasta_dir)){
-     mkdir($pasta_dir);
- }
+if($foto2 != null)
+    $foto2_path = $pasta_dir.$foto2["name"];
+else
+    $foto2_path = 'no_photo';
 
- $foto2_path = $pasta_dir.$foto2["name"];
 
  move_uploaded_file($foto2["tmp_name"],$foto2_path);
 

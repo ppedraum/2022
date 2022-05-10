@@ -7,7 +7,7 @@ $query = "insert into categoria(nome) values ('$nome')";
 
 if (!$conn) {
     die("Erro de conexão: " . mysqli_connect_error());
-
+}
 echo "Conectado com sucesso! <br>";
 
 if (mysqli_query($conn, $query)) {
