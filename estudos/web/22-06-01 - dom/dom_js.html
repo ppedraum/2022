@@ -1,0 +1,66 @@
+<html>
+<head>
+    <title>Exemplo: Document API</title>
+
+    <script>
+
+        //Setar um atributo da body
+        function setBodyAttr(attr, value) {
+            //Se existir uma body
+            if (document.body) 
+                //O atributo selecionado ganha o valor
+                document.body[attr] = value;
+            else
+                throw new Error("no support");
+        }
+    </script>
+
+</head>
+<body>
+    <div>
+        <form>
+
+            <p><b><code>text</code></b></p>
+
+            <!--
+                Quando o select mudar de index, o atributo text da body vai alterar o valor
+                para o index selecionado i.e. vai mudar a cor do texto da body para a opção selecionada 
+            -->
+            <select onChange="setBodyAttr('text',
+            this.options[this.selectedIndex].value);">
+                <option value="black">black</option>
+                <option value="red">red</option>
+            </select>
+
+            <p><b><code>bgColor</code></b></p>
+
+            <!--
+                Mesma coisa para o background color
+            -->
+            <select onChange="setBodyAttr('bgColor',
+            this.options[this.selectedIndex].value);">
+                <option value="white">white</option>
+                <option value="lightgrey">gray</option>
+            </select>
+
+            <p><b><code>link</code></b></p>
+
+            <!--
+                Mesma coisa para o link
+            -->
+            <select onChange="setBodyAttr('link',
+            this.options[this.selectedIndex].value);">
+                <option value="blue">blue</option>
+                <option value="green">green</option>
+            </select>
+
+            <small>
+                <a href="http://some.website.tld/page.html" id="sample">
+                    (sample link)
+                </a>
+            </small>
+
+        </form>
+  </div>
+</body>
+</html>

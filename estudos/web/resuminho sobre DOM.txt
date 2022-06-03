@@ -1,5 +1,5 @@
 
-A DOM (document object model) é uma API (uma forma de se comunicar entre o user e server side) que possibilita facilitar a edição de documentos HTML por meio de alguma linguagem de programação, principalmente javascript. Ela possui uma série de objetos como 'document', 'window', 'HTMLFormElement',e etc. Esses objetos possuem propriedades (variáveis (consts)) e métodos específicos para manipular a página e o documento em si.
+A DOM (document object model) é uma API (uma forma de se comunicar entre o user e server side) que possibilita facilitar a edição de documentos HTML por meio de alguma linguagem de programação, principalmente javascript. Ela possui uma série de objetos como 'document', 'window', 'HTMLFormElement',e etc. Esses objetos possuem propriedades (consts) e métodos específicos para manipular a página e o documento em si.
 
 exemplo: 
 
@@ -22,7 +22,7 @@ exemplo:
 </html>
 
 Node: Qualquer objeto no documento
-Elementos: Um node que é criado por uma função
+Elements: Elementos do HTML
 Atributos
 NodeList
 etc.

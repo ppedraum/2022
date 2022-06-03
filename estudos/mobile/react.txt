@@ -1,0 +1,23 @@
+React
+
+JSX: O JSX é uma sintaxe do javascript que permite colocar elementos direto no script para poupar tempo:
+
+    Ao invés de escrever document.createElement('elemento') e depois elemento.setAttribute('value', 'valor') podemos escrever:
+
+    <elemento value='valor' ou {qualquer expressão em javascript}></elemento>
+
+DOM: React tem um DOM próprio que possui a mesma forma de declaração do DOM Web (camelCase). É possível definir as propriedades de cada elemento assim como no HTML.
+
+Componente: Components do react-native ou Native Components (representações de Views do iOS e do Android, ou mesmo da Web) -> Possuem lógica e são utilizados para renderizar coisas na tela, interagir com o usuário pegando e dando informações, e basicamente qualquer outra coisa que esteja no App.
+
+export
+diferença entre propriedade e atributo
+
+props/state:
+As a general rule, use props to configure a component when it renders. Use state to keep track of any component data that you expect to change over time.
+
+fontes de estudos:
+https://pt-br.reactjs.org/docs/dom-elements.html -> DOM react (!= do DOM web)
+https://reactnative.dev/docs/intro-react -> parei em state
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export -> exports
+https://reactjs.org/docs/jsx-in-depth.html -> JSX

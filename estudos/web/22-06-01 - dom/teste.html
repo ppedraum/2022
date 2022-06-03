@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teste DOM</title>
+
+    <script>
+        const bodyStyle = document.body.style;
+        function setBodyAttr(attr, value) {
+            //Se existir uma body
+            if (document.body) 
+                //O atributo selecionado ganha o valor
+                document.body[attr] = value;
+            else
+                throw new Error("no support");
+        }
+
+        function teste_texto(){
+            //Cria um texto e também um elemento <br> e insere na body
+            texto = document.createTextNode('Hello Again');
+            document.body.appendChild(document.createElement('br'));
+            document.body.appendChild(texto);
+        }
+        
+        
+    </script>
+
+</head>
+<!--Quando a página carregar a body recebe um TextNode escrito 'Hello World'-->
+<body onload="document.body.appendChild(document.createTextNode('Hello World')); ">
+
+    <h2>Testes</h2>
+
+    <h3>Cor da Fonte</h3>
+    <!--
+        O setBodyAttr atua diretamente nos atributos da body i.e. não muda o estilo por css
+        (isso quer dizer que, para alterar o tipo de fonte, por exemplo, seria necessário um elemento <Font>
+        com seus próprios atributos)
+    -->
+    <select id="sel_cor"
+    onchange="setBodyAttr('text', this.options[this.selectedIndex].value);"
+    >
+        <option value="black">Preto</option>
+        <option value="blue">Azul</option>
+        <option value="#692675">Roxo Escuro</option>
+    </select>
+
+    <h3>Tipo de Fonte</h3>
+    <!--
+        Não consegui generalizar uma função para todas as propriedades de estilo da body,
+        então só fiz uma linha de código dizendo especificamente qual prop. trocar
+    -->
+    <select id="sel_tipo_fonte"
+    onchange="
+        /* teste(); */
+        document.body.style.fontFamily = this.options[this.selectedIndex].value;
+    "
+    >
+        <option value="Arial" selected>Arial</option>
+        <option value="Times New Roman">TNR</option>
+        <option value="Comic Sans MS">Comic Sans</option>
+    </select>
+    Aaaaaa
+
+    <h3>Tamanho da Fonte</h3>
+    <select id="sel_tipo_fonte"
+    onchange="
+        /* teste(); */
+        document.body.style.fontSize = this.options[this.selectedIndex].value;
+    "
+    >
+        <option value="10px">Pequena</option>
+        <option value="20px">Média</option>
+        <option value="30px">Grande</option>
+    </select>
+</body>
+</html>

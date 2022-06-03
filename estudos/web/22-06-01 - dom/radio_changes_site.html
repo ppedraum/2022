@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>pONG - Painel de Controle</title>
+
+    <script>
+        function mudarForm(){
+            if(document.getElementById('rd_tipo_publicacao_requisicao').checked){
+                document.getElementById('div_form_requisicao').removeAttribute('hidden');
+            }else{
+                document.getElementById('div_form_requisicao').setAttribute('hidden', true);
+            }
+            
+        }
+
+
+
+    </script>
+    <style>
+        #sct_tipo_publicacao span{
+            margin-inline: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form method="post" action="">
+
+        
+        Titulo<br><input type="text" id="txt_titulo"><br>
+        Descrição<br><input type="text" id="txt_descricao"><br><br>
+
+        <section id="sct_tipo_publicacao">
+            <span>
+                <label for="rd_tipo_publicacao_publicacao">Publicação</label>
+                <input type="radio" name="rd_tipo_publicacao" id="rd_tipo_publicacao_publicacao" value="publicacao" onclick="mudarForm()" checked>
+            </span>
+            <span>
+                <label for="rd_tipo_publicacao_evento">Evento</label>
+                <input type="radio" name="rd_tipo_publicacao" id="rd_tipo_publicacao_evento" value="evento" onclick="mudarForm()">
+            </span>
+            <span>
+                <label for="rd_tipo_publicacao_requisicao">requisição</label>
+                <input type="radio" name="rd_tipo_publicacao" id="rd_tipo_publicacao_requisicao" value="requisicao" onclick="mudarForm()">
+            </span>
+        </section>
+        
+        <div id="div_form_requisicao" hidden>
+            <form action="" method="post">
+                Foto: <input type="file" name="file_foto" id="file_foto"><br>
+                Qtd. de requisições: <input type="text" id="txt_qtd_requisicoes"><br>
+                Cargo Procurado:
+                <select name="sel_cargo_procurado" id="sel_cargo_procurado">
+                    <option value="secretário">secretário</option>
+                    <option value="Cozinheiro">Cozinheiro</option>
+                    <option value="Faxineiro">Faxineiro</option>
+                    <option value="Fisioterapeuta">Fisioterapeuta</option>
+                    <option value="Psicólogo">Psicólogo</option>
+                </select>
+            </form>
+        </div>
+
+    </form>
+
+</body>
+</html>
