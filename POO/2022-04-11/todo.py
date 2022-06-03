@@ -89,7 +89,7 @@ class Request():
         self.bloco=bloco
         
 #pegar o comando do input do usuário e fatiar em vários pedaços para direcionar os argumentos em diferentes níveis
-    def comando(self, comm):
+    def comando(self, comm : str):
 #fatiar e dividir entre o tipo de comando e argumento dado
         tipo=comm.split()[0]
         arg=comm.split(' ', 1)[1]
