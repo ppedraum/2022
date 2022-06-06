@@ -16,6 +16,12 @@ diferença entre propriedade e atributo
 props/state:
 As a general rule, use props to configure a component when it renders. Use state to keep track of any component data that you expect to change over time.
 
+
+state
+
+
+
+
 fontes de estudos:
 https://pt-br.reactjs.org/docs/dom-elements.html -> DOM react (!= do DOM web)
 https://reactnative.dev/docs/intro-react -> parei em state
