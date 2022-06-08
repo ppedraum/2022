@@ -22,7 +22,7 @@ class Jogador:
         self.is_aposentado = None
 
     def calcular_idade(self):
-        return int(dt.datetime.today().strftime('%Y')) - self.data_nasc
+        return 2022 - self.data_nasc
     def calcular_aposentadoria(self):
         dif = self.idade_aposentadoria[self.posicao] - self.calcular_idade()
         if dif <=0:
@@ -35,6 +35,17 @@ class Jogador:
         return self.idade_aposentadoria[self.posicao]
     def get_is_aposentado(self):
         return self.is_aposentado 
+
+    def get_attrs(self):
+        return [
+            self.get_nome(), 
+            self.get_data_nasc(),
+            self.get_peso(),
+            self.get_altura(),
+            self.get_nacionalidade(),
+            self.get_posicao(),
+            self.get_is_aposentado()
+        ]
 
     def set_nome(self, nome):
         self.nome=nome
@@ -66,21 +77,24 @@ class Jogador:
     def get_posicao(self):
         return self.posicao
 
+    
+
 """ pedro = Jogador('Pedro', 2004, 'Brasileiro', 1.83, 83, 'meio-campo')
 print(pedro.calcular_aposentadoria())
 print(pedro.calcular_idade())
 print(pedro.get_val_aposentadoria()) """
 
 class Janela:
-    def __init__(self, root: Tk, jogador: Jogador):
+    
+    def __init__(self, root: Tk):
         self.root = root
-        self.jogador = jogador
         self.nome_jogador = StringVar()
         self.dt_nasc_jogador = IntVar()
         self.altura_jogador = DoubleVar()
         self.peso_jogador = DoubleVar()
         self.nacao_jogador = StringVar()
         self.posicao_jogador = StringVar()
+        self.jogadores = {}
 
         self.ety_nome = Entry(root, textvariable=self.nome_jogador)
         Label(root, text='Nome:').grid(column=0, row=0)
@@ -98,11 +112,11 @@ class Janela:
         Label(root, text='Peso:').grid(column=0, row=3)
         self.ety_peso.grid(column=1, row=3)
 
-        self.cbb_posicao = Combobox(root, textvariable=self.posicao_jogador, values=jogador.posicoes)
+        self.cbb_posicao = Combobox(root, textvariable=self.posicao_jogador, values=Jogador().posicoes)
         Label(root, text='Posição:').grid(column=0, row=4)
         self.cbb_posicao.grid(column=1, row=4)
 
-        self.cbb_nacao = Combobox(root, textvariable=self.nacao_jogador, values=jogador.nacoes)
+        self.cbb_nacao = Combobox(root, textvariable=self.nacao_jogador, values=Jogador().nacoes)
         Label(root, text='Nação:').grid(column=0, row=5)
         self.cbb_nacao.grid(column=1, row=5)
 
@@ -110,29 +124,38 @@ class Janela:
         self.bt_enviar.grid(column=0, row=6, pady=20)
 
     def enviar_dados(self):
-        root = self.root
-        fr_dados = Frame(root)
-        Label(fr_dados, text=f'nome: {self.nome_jogador.get()}').pack()
-        Label(fr_dados, text=f'Ano de Nascimento: {self.dt_nasc_jogador.get()}').pack()
-        Label(fr_dados, text=f'Altura: {self.altura_jogador.get()}').pack()
-        Label(fr_dados, text=f'Peso: {self.peso_jogador.get()}').pack()
-        Label(fr_dados, text=f'Nacionalidade: {self.nacao_jogador.get()}').pack()
+
+        jogador = Jogador()
         
-        self.jogador.set_nome(self.nome_jogador.get())
-        self.jogador.set_data_nasc(self.dt_nasc_jogador.get())
-        self.jogador.set_altura(self.altura_jogador.get())
-        self.jogador.set_peso(self.peso_jogador.get())
-        self.jogador.set_nacionalidade(self.nacao_jogador.get())
-        self.jogador.set_posicao(self.posicao_jogador.get())
-        self.jogador.calcular_aposentadoria()
+        jogador.set_nome(self.nome_jogador.get())
+        jogador.set_data_nasc(self.dt_nasc_jogador.get())
+        jogador.set_altura(self.altura_jogador.get())
+        jogador.set_peso(self.peso_jogador.get())
+        jogador.set_nacionalidade(self.nacao_jogador.get())
+        jogador.set_posicao(self.posicao_jogador.get())
+        jogador.calcular_aposentadoria()
 
-        if self.jogador.get_is_aposentado:
-            Label(fr_dados, text='pode se aposentar').pack()
-        else:
-             Label(fr_dados, text='não pode se aposentar').pack()
+        book = xl.Workbook()
+        ws = book['Sheet']
+        ws.title = 'Jogadores'
+        ws['A1'] = 'Nome'
+        ws['B1'] = 'Data Nascimento'
+        ws['C1'] = 'Altura'
+        ws['D1'] = 'Peso'
+        ws['E1'] = 'Nacionalidade'
+        ws['F1'] = 'Posição'
+        ws['G1'] = 'Idade Aposentadoria'
+        ws['H1'] = 'Pode se aposentar'
 
-        fr_dados.grid(column=0, row=7)
-        print(self.jogador.__dict__)
+        self.jogadores[jogador.get_nome()] = jogador
+        print(self.jogadores.keys())
+
+        for i in self.jogadores:
+            ws.append(self.jogadores[i].get_attrs())
+
+        
+
+        book.save('Jogadores.xlsx')
 
     def set_settings(self, width, height, title):
         self.root.geometry(str(width)+'x'+str(height))
@@ -142,7 +165,6 @@ class Janela:
         self.root.mainloop()
 
 
-pedro = Jogador()
-janela = Janela(Tk(), pedro)
+janela = Janela(Tk())
 janela.set_settings(500,500,'teste')
 janela.run()
