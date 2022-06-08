@@ -1,5 +1,5 @@
 import React from "react";
-import {StyleSheet, Text, View, ScrollView, Image} from 'react-native';
+import {StyleSheet, Text, View, ScrollView, Image, useWindowDimensions} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
@@ -57,15 +57,35 @@ function SobreScreen(){
 
 function GaleriaScreen(){
     return(
+        
         <View style={styles.main}>
             <View style={styles.nav_galeria}>
                 <Text style={styles.txt_24_white}>Projetos</Text>
                 <Image source={require('../images/bt_sort.svg')} style={{width:27, height:27}} />
             </View>
 
+            
+            <View style={styles.tab_content_view}>
+
+                <View style={styles.row_view}>
+                    <Image source={require('../images/eu.jpg')} style={styles.img_galeria}/>
+                    <Image source={require('../images/eu.jpg')} style={styles.img_galeria}/>
+                </View>
+                <View style={styles.row_view}>
+                    <Image source={require('../images/eu.jpg')} style={styles.img_galeria}/>
+                    <Image source={require('../images/eu.jpg')} style={styles.img_galeria}/>
+                </View>
+                <View style={styles.row_view}>
+                    <Image source={require('../images/eu.jpg')} style={styles.img_galeria}/>
+                    <Image source={require('../images/eu.jpg')} style={styles.img_galeria}/>
+                </View>
+                
+            </View>
+
 
 
         </View>
+        
         //Fragmentos <> </> são usados quando não precisa aninhar elementos em um componente desnecessário no return();
         //é obrigatório ter só 1 componente no return();, que aninha o resto
     );
@@ -97,7 +117,6 @@ export default function PerfilPedreiro(){
                     screenOptions={{
                         tabBarStyle: { 
                             backgroundColor: '#6F6F6F',
-                            width: 360,
                         },
                         tabBarActiveTintColor: 'white',
                         tabBarInactiveTintColor: 'white',
@@ -119,6 +138,7 @@ export default function PerfilPedreiro(){
 const styles = StyleSheet.create({
 
     main: {
+        /* width: winDim().width, */
         display: "flex",
         flexDirection: "column",
         backgroundColor: '#E9EAEA',
@@ -145,7 +165,7 @@ const styles = StyleSheet.create({
     
     pfp_default:{
 
-        borderRadius: 50,
+        borderRadius: 100,
         width: 139,
         height: 139,
         minWidth: 100,
@@ -190,18 +210,22 @@ const styles = StyleSheet.create({
         paddingHorizontal: 14,
     },
 
-/*     galeria_row:{
-        display: flex,
-    }, */
-
-
     cell_view_vertical:{
         marginBottom: 10,
         marginTop: 10,
     },
 
-/*     cell_view_allsides:{
+    row_view:{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: "center",
+    },
+
+    img_galeria:{
         margin: 4,
-    } */
+        width: 177,
+        height: 177,
+    },
 
 });
