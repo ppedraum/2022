@@ -1,0 +1,14 @@
+Aplicar conceitos de metodologia ágil no meu TCC
+
+Para criar um ambiente de criação mais dinâmico e possibilitando um software funcional em pouco tempo
+
+Objetivo Atual: Criar o MVP
+
+
+Metodologias mais aplicáveis:
+
++ eXtreme Programming
++ Feature Driven Development
+
+https://neilpatel.com/br/blog/metodologia-agil/
+https://blog.runrun.it/o-que-sao-sprints/
