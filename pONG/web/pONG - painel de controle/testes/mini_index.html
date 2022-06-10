@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MiniIndex</title>
+
+    <script>
+
+        var resultados=[
+
+            {
+                nome:'Salve Vidas!',
+                id:'1240'
+            },
+            {
+                nome:'Salve Crianças!',
+                id:'1270'
+            }
+
+        ];
+        var ids_pesquisados = [];
+        function pesquisar(parentTxt){
+            
+            let pesquisa = parentTxt['value'];
+            for(let i = 0;i<resultados.length;i++){
+                if(resultados[i].nome.includes(pesquisa)){
+                    criarBox(resultados[i], parentTxt.parentNode);
+                    ids_pesquisados.push(resultados[i].id)
+                }
+            }
+        }
+        function criarBox(objResultado, parentNode){
+            alert('meu node = ' + parentNode['id']);
+            let div = parentNode;
+            let box = document.createElement('div');
+            box.setAttribute('id', 'div_'+objResultado['id']);
+            box.style.width = '200px';
+            box.style.height = '50px';
+            box.style.display = 'flex';
+            box.style.alignItems = 'center';
+
+            box.appendChild(document.createTextNode(objResultado['nome']))
+            
+            div.appendChild(box);
+            return box;
+        }
+
+    </script>
+
+
+</head>
+<body>
+    <div id='div_pesquisa'>
+        Pesquisar:
+        <input type="text" name="txt_pesquisar" id="txt_pesquisar" onclick="/* alert(document.getElementById('txt_pesquisar')['value']) */">
+        <button onclick="pesquisar(document.getElementById('txt_pesquisar'))">Pesquisar!</button>
+    </div>
+</body>
+</html>

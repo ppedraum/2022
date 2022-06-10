@@ -12,9 +12,10 @@
         <p><a href="../../index.php"> pONG </a>- Adicionar Publicação...</p>
         <br><br>
     </header>
+
     <div style='display:flex;align-content:space-evenly;width:500px' id='sct_pesquisar_publicacoes'>
         <div style='padding:20px;'>
-            <input type="text" name='pesquisar_publicacoes' value='pesquisar...'><br>
+            Pesquisar Publicações <input type="text" name='txt_pesquisar_publicacoes'><br>
             Filtrar por...
             <select name="filtro" id="">
                 <option value="null">...</option>
