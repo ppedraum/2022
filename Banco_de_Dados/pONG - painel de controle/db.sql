@@ -35,3 +35,9 @@ insert into Publicacao(titulo, descricao, qtd_likes, qtd_compartilhamentos, date
     'Teste de Publicação', 'Isso é um teste.', 0, 0, '2022-06-10 17:05', 'TESTE DEBUG', 1, null, null);
 
 );
+
+insert into Publicacao(titulo, descricao, qtd_likes, qtd_compartilhamentos, datetime_publicacao, tipo_publicacao, id_ONG, id_evento, id_req_voluntariado) values (
+
+    'Teste 2', 'Um outro teste', 0, 0, '2022-09-15 18:18', 'TESTE DEBUG', 1, null, null
+
+);

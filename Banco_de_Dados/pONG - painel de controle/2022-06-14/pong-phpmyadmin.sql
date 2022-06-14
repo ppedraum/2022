@@ -152,6 +152,12 @@ CREATE TABLE IF NOT EXISTS `ong` (
 INSERT INTO `ong` (`id`, `CNPJ`, `login`, `senha`, `nome`, `nome_fantasia`, `sede`, `cidade`, `UF`, `CEP`, `telefone`, `data_abertura`, `id_area_atuacao`) VALUES
 (1, '83.649.830/0001-71', 'satc-admin', 'satc123', 'ASSOCIACAO BENEFICENTE DA INDUSTRIA CARBONIFERA DE SANTA CATARINA', 'SATC', 'Rua Pascoal Meller, 73', 'Criciúma', 'SC', '88805-380', '+55 (48) 3431-7568', '2022-03-21', 1);
 
+insert into Publicacao(titulo, descricao, qtd_likes, qtd_compartilhamentos, datetime_publicacao, tipo_publicacao, id_ONG, id_evento, id_req_voluntariado) values (
+
+    'Teste 2', 'Um outro teste', 0, 0, '2022-09-15 18:18', 'TESTE DEBUG', 1, null, null
+
+);
+
 -- --------------------------------------------------------
 
 --
