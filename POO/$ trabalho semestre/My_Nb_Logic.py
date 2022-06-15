@@ -49,13 +49,11 @@ class Agenda:
                     data = dt.date(self.ano, mes, dia)
                     self.paginas[data.strftime('%d/%m/%Y')] = Pagina(data)
 
-
     def add_index(self, data, titulo):
         self.index[titulo] = self.paginas[data]
+
     def del_index(self, titulo):
         del self.index[titulo]
-    def get_index(self):
-        return self.index
         
     def write(self, data, conteudo):
         self.paginas[data].set_conteudo(conteudo)
