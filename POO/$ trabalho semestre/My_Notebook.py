@@ -14,13 +14,12 @@ class Janela():
         self.agd.criar_agenda()
 
         self.order = {}
+        self.curr_order = 0
         self.order[0] = self.index()
+        self.order[1] = self.menu()
 
-        j=1
-        for i in self.agd.get_all_pgs():
-            self.order[j] = Pagina(i)
-            j+=1
-        """ self.index().pack() """
+        for i in range(len(self.agd.get_all_pgs())):
+            self.order[i+2] = self.pagina(self.agd.get_all_pgs().keys()[i])
         self.pagina('11/11/2022').pack()
 
         self.root.mainloop()
@@ -33,8 +32,13 @@ class Janela():
     def login(self, usuario, senha):
         pass
 
-    def menu(self, titulos:list):
-        pass
+    def menu(self):
+        root = self.root
+
+        fr_conteudo = Frame(root)
+        Label(fr_conteudo, text='Hello World!').pack()
+
+        return fr_conteudo
 
     def pagina(self, data):
 
@@ -43,8 +47,6 @@ class Janela():
 
         root = self.root
         fr_conteudo = Frame(root)
-        root.bind('<Key>', self.mudar_pg)
-
 
         fr_data = Frame(fr_conteudo, pady=10, width=self.width-20, height=50)
         lbl_data = Label(fr_data, text=data, font=('Arial', 15, 'normal'))
@@ -54,13 +56,27 @@ class Janela():
         txt_input = Text(fr_conteudo, font=('Arial', 15, 'normal'), width=57, height=30, pady=10)
         txt_input.insert(1.0, get_conteudo)
         txt_input.pack()
+
+        """ root.bind('<Key>', self.mudar_pg) """
+
         return fr_conteudo
 
-    def mudar_pg(self, evt):
+    def mudar_pg(self, evt, order):
         if evt == 'Right':
-            self.order
+            self.order[self.curr_order].pack_forget()
+            self.curr_order += 1
+            self.order[self.curr_order].pack()
+        elif evt == 'Left':
+            self.order[self.curr_order].pack_forget()
+            self.curr_order -= 1
+            self.order[self.curr_order].pack()
+
 
 my_agenda = Agenda('Pedro', '123', 2022)
-jan = Janela(Tk(), my_agenda,738, 806)
+my_agenda.criar_agenda()
+
+print(type(my_agenda.get_all_pgs().keys()).mapping)
+
+""" jan = Janela(Tk(), my_agenda,738, 806) """
 """ my_agenda.write('10/11/2022', 'Hello World!') """
-print(jan.order)
+""" print(jan.order) """
