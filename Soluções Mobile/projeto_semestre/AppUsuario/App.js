@@ -2,19 +2,17 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
-import PerfilPedreiro from './src/components/PerfilPedreiro';
-import Teste from './src/testes/Main'
-import HomePedreiro from './src/components/HomePedreiro';
-import SobreScreen from './src/components/SobreScreen';
-import GaleriaScreen from './src/components/GaleriaScreen';
+import PerfilPedreiro from './src/PerfilPedreiro';
+import GaleriaScreen from './src/geral_components/GaleriaScreen';
+import PostObra from './src/PostObra';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName='HomePedreiro'>  
-                <Stack.Screen 
+            <Stack.Navigator initialRouteName='PerfilPedreiro'>  
+                {/* <Stack.Screen 
                     name="HomePedreiro" 
                     component={HomePedreiro} 
                     options={{
@@ -24,10 +22,11 @@ export default function App() {
                     },
                     headerTintColor: '#FFF'
                     }}
-                />
+                /> */}
                 <Stack.Screen name="PerfilPedreiro" component={PerfilPedreiro} />
-                <Stack.Screen name="SobreScreen" component={SobreScreen} />
-                <Stack.Screen name="GaleriaScreen" component={GaleriaScreen} />
+                <Stack.Screen name="PostObra" component={PostObra} />
+                <Stack.Screen name="GaleriaScreen" component={GaleriaScreen}/>
+
             </Stack.Navigator>
       </NavigationContainer>
      
