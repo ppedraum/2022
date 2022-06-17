@@ -1,6 +1,8 @@
 import React from "react";
 import {StyleSheet, Text, View, ScrollView, Image, useWindowDimensions} from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+
+import ProfileView from './geral_components/ProfileView';
 import GaleriaScreen from "./geral_components/GaleriaScreen";
 
 function SobreScreen(){
@@ -97,22 +99,7 @@ const TopNav = createMaterialTopTabNavigator();
 export default function PerfilPedreiro(){
     return(
             <>
-                <View style={styles.main}>
-                    
-                    <View style={styles.pf_view}>
-                        <Image 
-                        source={
-                        //{uri: 'https://reactnative.dev/img/tiny_logo.png'}
-                        require('./images/some_pfp.jpg')
-                        }
-                        style={styles.pfp_default}/>
-                        <View style={styles.nome_usuario}>
-                            <Text style={styles.txt_24}>José Rovaldo Silva</Text>
-                            <Text style={styles.txt_24}>Pedreiro</Text>
-                        </View>
-                    </View>
-
-                </View>
+                <ProfileView/>
                 <TopNav.Navigator 
                 initialRouteName="Sobre"
                 screenOptions={{

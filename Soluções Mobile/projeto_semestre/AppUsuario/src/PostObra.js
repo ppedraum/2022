@@ -1,6 +1,7 @@
 import React from "react";
 import {StyleSheet, Text, View, ScrollView, Image, Button, TextInput, TouchableOpacity} from 'react-native';
 import StarRating from "./geral_components/StarRating";
+import ProfileView from "./geral_components/ProfileView"
 
 
 export default function PostObra({navigation}){
@@ -10,7 +11,7 @@ export default function PostObra({navigation}){
             <View style={styles.main}>
                     
                 
-
+                <ProfileView></ProfileView>
                 <Text style={styles.title_24_bold}>Título</Text>
 
                 <View>
