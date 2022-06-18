@@ -33,6 +33,15 @@
         }
 
     </script>
+
+    <?php
+    
+    require_once('../php_stuff/datab.php');
+
+    $sel_tipo_evento = mysqli_query($conn, 'select * from tipo_evento');
+    
+    ?>
+
     <style>
         #sct_tipo_publicacao span{
             margin-inline: 10px;
@@ -47,7 +56,9 @@
         <p><a href="../../index.php"> pONG </a>- Adicionar Publicação...</p>
         <br><br>
     </header>
-    <form method="post" action="../php_stuff/add_publicacao.php">
+
+    <!-- action="../php_stuff/add_publicacao.php"  -->
+    <form method="post" enctype="multipart/form-data" action="../php_stuff/add_publicacao.php" >
 
         
         Titulo<br><input type="text" id="txt_titulo" name='txt_titulo'><br>
@@ -73,11 +84,14 @@
                 <div>
                     <label for="sel_tipo_evento">Tipo de Evento</label><br>
                     <select name="sel_tipo_evento" id="sel_tipo_evento">
-                        <option value="arrecadacao">Arrecadação</option>
-                        <option value="divulgacao">Divulgação</option>
-                        <option value="palestras">Palestras</option>
-                        <option value="reunioes">Reuniões</option>
-                        <option value="outros">Outros</option>
+                        
+                        <?php
+                        
+                        while($row = $sel_tipo_evento->fetch_assoc()){
+                            echo "<option value=".$row['id'].">".$row['titulo']."</option>";
+                        }
+                        ?>
+
                     </select>
                 </div>
                 <div>
@@ -92,7 +106,7 @@
                     <label for="sel_estado_evento">Estado</label><br>
                     <select name="sel_estado_evento" id="sel_estado_evento" 
                     onmousedown="/* delArrIndex('sel_estado_evento') */">
-                        <option value="null" selected>Selecione...</option>
+                        <option value="nl" selected>Selecione...</option>
                         <option value="AC">Acre</option>
                         <option value="AL">Alagoas</option>
                         <option value="AP">Amapá</option>
