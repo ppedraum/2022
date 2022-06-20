@@ -23,6 +23,7 @@ class Agenda:
 
         self.index = {}
         self.paginas = {}
+        self.criar_agenda()
 
     def criar_agenda(self):
 
@@ -62,6 +63,8 @@ class Agenda:
         return self.paginas[data]
     def get_all_pgs(self):
         return self.paginas
+    def get_ano(self):
+        return self.ano
     
 
 
