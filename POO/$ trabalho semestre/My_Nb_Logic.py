@@ -21,10 +21,14 @@ class Agenda:
         self.senha=senha
         self.ano=ano
 
-        self.index = {}
+        
         self.paginas = {}
         self.criar_agenda()
 
+        self.titulos = {
+            1:self.get_pg('20/02/2022'),
+            2:self.get_pg('21/02/2022')
+        }
     def criar_agenda(self):
 
         for mes in range(12):
@@ -50,17 +54,21 @@ class Agenda:
                     data = dt.date(self.ano, mes, dia)
                     self.paginas[data.strftime('%d/%m/%Y')] = Pagina(data)
 
-    def add_index(self, data, titulo):
-        self.index[titulo] = self.paginas[data]
+    def add_titulo(self, data, titulo):
+        self.titulos[titulo] = self.paginas[data]
 
-    def del_index(self, titulo):
-        del self.index[titulo]
+    def del_titulo(self, titulo):
+        del self.titulos[titulo]
+
+    def get_titulos(self):
+        return self.titulos
         
     def write(self, data, conteudo):
         self.paginas[data].set_conteudo(conteudo)
 
     def get_pg(self, data):
         return self.paginas[data]
+
     def get_all_pgs(self):
         return self.paginas
     def get_ano(self):
