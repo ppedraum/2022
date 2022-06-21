@@ -47,33 +47,40 @@ if(isset($_POST['bt_submit_publicacao'])){
         $hor_inicio_evento = $_POST['time_inicio_evento'];
         $hor_fim_evento = $_POST['time_fim_evento'];
 
+        $status = $statusMsg = 'erro na imagem'; 
+        if(!empty($_FILES["blob_evento"]["name"])) { 
+            // Get file info 
+            $fileName = basename($_FILES["blob_evento"]["name"]); 
+            $fileType = pathinfo($fileName, PATHINFO_EXTENSION); 
+            
+            // Allow certain file formats 
+            $allowTypes = array('jpg','png','jpeg'); 
+            if(in_array($fileType, $allowTypes)){ 
+                $image = $_FILES['blob_evento']['tmp_name']; 
+                $imgContent = addslashes(file_get_contents($image)); 
 
-        $blob_evento = '';
-
-        if(validateImage($_FILES['blob_evento'])){
-
-            $blob_evento = addslashes(file_get_contents($_FILES['blob_evento']['tmp_name']));
-            echo('Arquivo suportado!');
-        }else{
-            echo('Arquivo não suportado!');
+            }else{ 
+                $statusMsg = 'Desculpe, apenas imagens são suportadas.'; 
+            } 
+        }else{ 
+            $statusMsg = 'Por favor, selecione uma imagem para o evento.'; 
         }
-
 
         $id_ONG = 1;
         $id_tipo_evento = $_POST['sel_tipo_evento'];
 
         $query_evento = "insert into Evento 
         (endereco, cidade, UF, datetime_inicio, datetime_fim,
-        qtd_inscricoes, foto, id_ONG, id_tipo_evento )
+        qtd_inscricoes, foto, id_tipo_evento, id_ONG)
 
         values (
             '$endereco_evento',
             '$cidade_evento',
             '$estado_evento',
-            '$date_inicio_evento $hor_inicio_evento ',
-            '$date_fim_evento $hor_fim_evento',
+            '$date_inicio_evento $hor_inicio_evento:00 ',
+            '$date_fim_evento $hor_fim_evento:00',
             0,
-            $blob_evento,
+            '$imgContent',
             $id_ONG,
             $id_tipo_evento
         ) ";
@@ -83,23 +90,24 @@ if(isset($_POST['bt_submit_publicacao'])){
         } else {
             echo "Erro: ".$query_evento."<br>".mysqli_error($conn);
         }
+        echo $statusMsg; 
 
+        
         $id_evento = $conn->insert_id;
 
         $query_publicacao = "insert into Publicacao (
             titulo, descricao, qtd_likes, qtd_compartilhamentos, datetime_publicacao,
             tipo_publicacao, id_ONG, id_evento
         ) values (
-            $titulo,
-            $descricao,
+            '$titulo',
+            '$descricao',
             0,
             0,
-            $datetime_atual,
+            '$datetime_atual',
             'EVENTO',
             $id_ONG,
             $id_evento
         )";
-        
     }elseif($rd_tipo_publicacao == 'requisicao'){
         echo('requisição');
     }

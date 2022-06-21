@@ -27,6 +27,15 @@ function isFiltroChecked(idFiltro, idElement){
     }
 }
 
+/* function uncheckall(){
+    chbs = document.getElementsByTagName('input');
+    for (let i = 0;i < chbs.lengh; i++){
+        if (chbs[i].getAttribute('type') == 'checkbox')
+            chbs[i].setAttribute('checked', false);
+    }
+
+} */
+
 /* function cnpjValidation(value) {
   if (!value) return false
 
