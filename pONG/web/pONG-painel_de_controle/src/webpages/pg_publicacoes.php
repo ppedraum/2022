@@ -70,15 +70,12 @@
     <div id='sct_view_publicacoes' style='padding-top:20px;'>
 
         <?php
-        
-            $txt_titulo='';
-            $query = "select * from Publicacao where titulo like '%$txt_titulo%'";
-
             if(isset($_GET['bt_pesquisar_publicacao'])){
                 $txt_titulo = $_GET['txt_pesquisar_publicacoes'];
+                $query = "select * from Publicacao where titulo like '%$txt_titulo%'";
                 $ch_filtro_tipo = isset($_GET['ch_filtro_tipo']) ? true : false ;
                 $ch_filtro_data = isset($_GET['ch_filtro_data']) ? true : false ;
-            
+                
                 $sel_tipo_publicacao = $_GET['sel_tipo_publicacao'];
                 $dt_publicacao = $_GET['dt_publicacao'];
 
