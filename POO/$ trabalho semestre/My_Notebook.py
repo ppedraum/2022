@@ -16,13 +16,18 @@ class Janela():
         self.agd = agenda
 
         self.fr_menu = Frame(self.root)
+
         self.curr_order = 0
         self.order = {}
+        self.menu_order = {}
+
         self.order[0] = self.index()
         self.order[1] = self.menu()
             
-        for key, value in self.num_to_date().items():
-            self.order[key] = self.pagina(self.agd.get_pg(value))[0]
+        for num, date in self.num_to_date().items():
+            self.order[num] = self.pagina(self.agd.get_pg(date))
+            if self.agd.get_pg(date) in self.agd.get_titulos().values():
+                self.menu_order[date] = self.order[num]
         
         self.order[0].pack()
         
@@ -50,22 +55,29 @@ class Janela():
         fr_header.pack()
 
         titulos = self.agd.get_titulos()
+
         for titulo, pagina in titulos.items():
-            label = Label(self.fr_menu, text=f"{pagina.get_data_string()} - {str(titulo)}", font=('Arial', 15, 'normal') )
-            label.bind('<Button-1>', lambda evt : self.go_to_pg(evt, pagina))
+            fr_label = Frame(self.fr_menu)
+            label = Label(fr_label, text=f"{pagina.get_data_string()} - {str(titulo)}", font=('Arial', 15, 'normal'))
+            label.bind('<Button-1>', lambda evt : self.go_to_pg(evt, pagina.get_data_string()))
             label.pack()
+            fr_label.pack()
 
         return self.fr_menu
 
-    def go_to_pg(self, evt, pagina):
-        order = 0
-        """ for key, value in self.order.items():
-            if value.pag == pagina:
-                print('teste') """
+    def go_to_pg(self, evt, data):
         self.order[self.curr_order].pack_forget()
-        self.curr_order = 4
+
+        for num, frame in self.order.items():
+            if frame == self.menu_order[data]:
+                self.curr_order = num
+
         self.order[self.curr_order].pack()
 
+    def go_to_menu(self, evt):
+        self.order[self.curr_order].pack_forget()
+        self.curr_order = 1
+        self.order[self.curr_order].pack()
 
     def pagina(self, pagina : Pagina):
 
@@ -74,13 +86,14 @@ class Janela():
 
         fr_data = Frame(fr_conteudo, pady=10, width=self.width-20, height=50)
         lbl_data = Label(fr_data, text=pagina.get_data_string(), font=('Arial', 15, 'normal'))
+        lbl_data.bind('<Button-1>', self.go_to_menu)
         lbl_data.place(x=0, y=0)
         fr_data.pack()
 
         txt_input = Text(fr_conteudo, font=('Arial', 15, 'normal'), width=57, height=30, pady=10)
         txt_input.insert(1.0, pagina.get_conteudo())
         txt_input.pack()
-        return [fr_conteudo, txt_input.get(1.0, END), pagina]
+        return fr_conteudo
 
     def mudar_pg(self, evt):
 
