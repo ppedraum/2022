@@ -1,0 +1,4 @@
+https://www.youtube.com/watch?v=sjAeLwuezxo - vídeo tutorial
+
+função de array map():
+    https://www.devmedia.com.br/react-js-utilizando-o-metodo-map/42902
