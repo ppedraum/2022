@@ -14,4 +14,8 @@ $conn = mysqli_connect($servername, $username, $password, $database);
     echo "Conectado com sucesso! <br>";
 } */
 
+function debug_log($data){
+    echo "<script>console.log('$data')</script>";
+}
+
 ?>

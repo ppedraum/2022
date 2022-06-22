@@ -5,7 +5,8 @@ date_default_timezone_set('America/Sao_Paulo');
 
 require_once ('datab.php');
 
-$id_ong = 1;
+session_start();
+$id_ONG = $_SESSION['id_ong'];
 
 $titulo = $_POST['txt_titulo'];
 $descricao = $_POST['txt_descricao'];
@@ -18,7 +19,6 @@ $query_publicacao = '';
 if (!$conn) {
     die("Erro de conexão: " . mysqli_connect_error());
 }
-echo "Conectado com sucesso! <br>";
 
 
 if(isset($_POST['bt_submit_publicacao'])){
@@ -34,7 +34,7 @@ if(isset($_POST['bt_submit_publicacao'])){
             0,
             '$datetime_atual',
             'PUBLICACAO',
-            $id_ong
+            $id_ONG
         )";
 
     }elseif($rd_tipo_publicacao == 'evento'){
@@ -66,7 +66,6 @@ if(isset($_POST['bt_submit_publicacao'])){
             $statusMsg = 'Por favor, selecione uma imagem para o evento.'; 
         }
 
-        $id_ONG = 1;
         $id_tipo_evento = $_POST['sel_tipo_evento'];
 
         $query_evento = "insert into Evento 
@@ -86,11 +85,11 @@ if(isset($_POST['bt_submit_publicacao'])){
         ) ";
 
         if (mysqli_query($conn, $query_evento)) {
-            echo "Evento criado!";
+            debug_log( "Evento criado!");
         } else {
-            echo "Erro: ".$query_evento."<br>".mysqli_error($conn);
+            debug_log( "Erro: ".$query_evento."<br>".mysqli_error($conn));
         }
-        echo $statusMsg; 
+        debug_log( $statusMsg); 
 
         
         $id_evento = $conn->insert_id;
@@ -109,27 +108,54 @@ if(isset($_POST['bt_submit_publicacao'])){
             $id_evento
         )";
     }elseif($rd_tipo_publicacao == 'requisicao'){
-        echo('requisição');
+
+        $id_cargo_voluntario = $_POST['sel_cargo_voluntario'];
+        $qtd_requisicoes = $_POST['txt_qtd_requisicoes'];
+
+        $query_requisicao = "insert into Requisicao_Voluntariado(
+            qtd_requisicoes, 
+            qtd_requisicoes_preenchidas,
+            qtd_requisicoes_vagas,
+            id_cargo_voluntario
+        ) values (
+            $qtd_requisicoes,
+            0,
+            $qtd_requisicoes,
+            $id_cargo_voluntario
+        )";
+
+        if (mysqli_query($conn, $query_requisicao)) {
+            debug_log( "Valores alterados com sucesso!");
+        } else {
+            debug_log( "Erro: ".$query_requisicao."<br>".mysqli_error($conn));
+        }
+
+        $id_requisicao = $conn->insert_id;
+
+        $query_publicacao = "insert into Publicacao (
+            titulo, descricao, qtd_likes, qtd_compartilhamentos, datetime_publicacao,
+            tipo_publicacao, id_ONG, id_req_voluntariado
+        ) values (
+            '$titulo',
+            '$descricao',
+            0,
+            0,
+            '$datetime_atual',
+            'REQUISICAO',
+            $id_ONG,
+            $id_requisicao
+        )";
     }
 }
 
 
 if (mysqli_query($conn, $query_publicacao)) {
-    echo "Valores alterados com sucesso!";
+    debug_log( "Valores alterados com sucesso!");
 } else {
-    echo "Erro: ".$query_publicacao."<br>".mysqli_error($conn);
+    debug_log( "Erro: ".$query_publicacao."<br>".mysqli_error($conn));
 }
 mysqli_close($conn); 
-
-function validateImage($img){
-    $isallowed = false;
-    $allowed_types = array('image/jpg', 'image/jpeg', 'image/png');
-    if(in_array($img['type'], $allowed_types)){
-        $isallowed = true;
-    }
-    return $isallowed;
-}
-
+echo "<script>window.location.assign('../webpages/pg_publicacoes.php')</script>";
 
 ?>
 

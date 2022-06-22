@@ -7,9 +7,7 @@
     <title>Document</title>
 
     <?php
-
     require_once('../php_stuff/datab.php');
-    require_once('../php_stuff/pesquisar_publicacoes.php');
 
     $inst = mysqli_query($conn, 'select nome_fantasia, id from ONG');
 
@@ -20,12 +18,12 @@
 <body>
     <header>
         <br><br>
-        <p><a href="../../index.php"> pONG </a>- Adicionar Publicação...</p>
+        <p><a href="../../menu.php"> pONG </a>- Adicionar Publicação...</p>
         <br><br>
     </header>
 
     <div id='sct_ger_publicacoes' style="display:flex;" >
-        <form method='get'>
+        <form method='post'>
             <div id='sct_txt_pesquisa'>
                 Pesquisar Publicações <input type="text" name='txt_pesquisar_publicacoes' id='txt_pesquisar_publicacoes'>
                 <input type="submit" value="Pesquisar" name='bt_pesquisar_publicacao' id='bt_pesquisar_publicacao'>
@@ -42,9 +40,8 @@
 
                     <select name="sel_tipo_publicacao" id="sel_tipo_publicacao" hidden>
 
-                        <option value="TESTE DEBUG">TESTE DEBUG</option>
-                        <option value="PUBLICAÇÃO">PUBLICAÇÃO</option>
-                        <option value="REQUISIÇÃO">REQUISIÇÃO</option>
+                        <option value="PUBLICACAO">PUBLICAÇÃO</option>
+                        <option value="REQUISICAO">REQUISIÇÃO</option>
                         <option value="EVENTO">EVENTO</option>
 
                     </select>
@@ -70,14 +67,22 @@
     <div id='sct_view_publicacoes' style='padding-top:20px;'>
 
         <?php
-            if(isset($_GET['bt_pesquisar_publicacao'])){
-                $txt_titulo = $_GET['txt_pesquisar_publicacoes'];
-                $query = "select * from Publicacao where titulo like '%$txt_titulo%'";
-                $ch_filtro_tipo = isset($_GET['ch_filtro_tipo']) ? true : false ;
-                $ch_filtro_data = isset($_GET['ch_filtro_data']) ? true : false ;
+            
+            if(!isset($_POST['bt_pesquisar_publicacao'])){
+                $query = mysqli_query($conn, "select * from Publicacao order by datetime_publicacao desc");
                 
-                $sel_tipo_publicacao = $_GET['sel_tipo_publicacao'];
-                $dt_publicacao = $_GET['dt_publicacao'];
+                while($row = $query->fetch_assoc()){
+                    echo "<div name='publi-".$row['id']."' id='publi".$row['id']."'>".$row['titulo']." - ".$row['datetime_publicacao']."</div><br>";
+                }
+            }
+            else{
+                $txt_titulo = $_POST['txt_pesquisar_publicacoes'];
+                $query = "select * from Publicacao where titulo like '%$txt_titulo%' ";
+                $ch_filtro_tipo = isset($_POST['ch_filtro_tipo']) ? true : false ;
+                $ch_filtro_data = isset($_POST['ch_filtro_data']) ? true : false ;
+                
+                $sel_tipo_publicacao = $_POST['sel_tipo_publicacao'];
+                $dt_publicacao = $_POST['dt_publicacao'];
 
                 if($dt_publicacao == ''){
                     $dt_publicacao = date('0000-00-00');
@@ -93,14 +98,15 @@
                 elseif($ch_filtro_data){
                     $query .= "and datetime_publicacao > '$dt_publicacao'";
                 }
+                $query .= "order by datetime_publicacao DESC";
+                $query = mysqli_query($conn, $query);
+            
+                while($row = $query->fetch_assoc()){
+                    echo "<div name='publi-".$row['id']."' id='publi-".$row['id']."'>".$row['titulo']." - ".$row['datetime_publicacao']."</div><br>";
+                }
             }
             
-            /* $query .= "order by datetime_publicacao DESC"; */
-            $query = mysqli_query($conn, $query);
-        
-            while($row = $query->fetch_assoc()){
-                echo "Título: ".$row['titulo']."<br>";
-            }
+            
         ?>
     </div>
 

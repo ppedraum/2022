@@ -6,11 +6,6 @@
 
     <script>
 
-        /* function delArrIndex(selId) {
-        let select = document.getElementById(selId);
-        select.remove(select[0]);
-        } */
-
         function mudarForm(){
             
             if(document.getElementById('rd_tipo_publicacao_publicacao').checked){
@@ -39,7 +34,7 @@
     require_once('../php_stuff/datab.php');
 
     $sel_tipo_evento = mysqli_query($conn, 'select * from tipo_evento');
-    
+    $sel_cargo_voluntario = mysqli_query($conn, 'select * from cargo_voluntario')
     ?>
 
     <style>
@@ -53,7 +48,7 @@
     
     <header>
         <br><br>
-        <p><a href="../../index.php"> pONG </a>- Adicionar Publicação...</p>
+        <p><a href="../../menu.php"> pONG </a>- Adicionar Publicação...</p>
         <br><br>
     </header>
 
@@ -156,15 +151,14 @@
 
         <div id="div_form_requisicao" hidden>
             <!-- <form action="" method="post"> -->
-                Foto: <input type="file" name="file_foto" id="file_foto"><br>
-                Qtd. de requisições: <input type="text" id="txt_qtd_requisicoes"><br>
+                Qtd. de requisições: <input type="text" name="txt_qtd_requisicoes" id="txt_qtd_requisicoes"><br>
                 Cargo Procurado:
-                <select name="sel_cargo_procurado" id="sel_cargo_procurado">
-                    <option value="secretário">secretário</option>
-                    <option value="Cozinheiro">Cozinheiro</option>
-                    <option value="Faxineiro">Faxineiro</option>
-                    <option value="Fisioterapeuta">Fisioterapeuta</option>
-                    <option value="Psicólogo">Psicólogo</option>
+                <select name="sel_cargo_voluntario" id="sel_cargo_voluntario">
+                    <?php
+                        while($row = $sel_cargo_voluntario->fetch_assoc()){
+                            echo "<option value=".$row['id'].">".$row['nome']."</option>";
+                        }
+                    ?>
                 </select>
             <!-- </form> -->
         </div>
