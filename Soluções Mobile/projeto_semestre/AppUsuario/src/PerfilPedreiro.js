@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
         /* width: winDim().width, */
         display: "flex",
         flexDirection: "column",
-        backgroundColor: '#E9EAEA',
+        backgroundColor: "#E9EAEA",
         alignItems: "center",
     },
 

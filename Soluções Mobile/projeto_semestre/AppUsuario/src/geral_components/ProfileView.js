@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-evenly",
-        alignItems: "center",
+        alignItems: "flex-start",
         backgroundColor: '#E9EAEA',
         width: 294,
         height: 233,

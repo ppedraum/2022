@@ -15,6 +15,7 @@ import Pesquisar from './src/Pesquisar';
 import PerfilPedreiro from './src/PerfilPedreiro';
 import GaleriaScreen from './src/geral_components/GaleriaScreen';
 import PostObra from './src/PostObra';
+import Comments from './src/comments/Comments';
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
                 <Stk.Screen name='PerfilPedreiro' component={PerfilPedreiro}/>
                 <Stk.Screen name="PostObra" component={PostObra} />
                 <Stk.Screen name="GaleriaScreen" component={GaleriaScreen}/>
+                <Stk.Screen name="Comments" component={Comments}/>
             </Stk.Navigator>
 
         </NavigationContainer>

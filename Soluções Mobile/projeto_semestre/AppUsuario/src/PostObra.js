@@ -2,7 +2,7 @@ import React from "react";
 import {StyleSheet, Text, View, ScrollView, Image, Button, TextInput, TouchableOpacity} from 'react-native';
 import StarRating from "./geral_components/StarRating";
 import ProfileView from "./geral_components/ProfileView"
-
+import Comments from "./comments/Comments";
 
 export default function PostObra({navigation}){
     return(
@@ -29,27 +29,9 @@ export default function PostObra({navigation}){
                 <View>
                     {/*Área do botão do comentário*/}
                     <View style={styles.cell_view_vertical} >
-                        <Text style={styles.title_24_bold} >Comentários</Text>
-                        <TextInput style={styles.txtin_comentario} placeholder='Digite Um comentário...' />
+                        <Comments/>
                     </View>
 
-
-                    {/*Área do Comentário gerada*/}
-                    <View style={{backgroundColor: '#CBCDCD'}}>
-                        {/*Nome com Rating*/}
-                        <View style={{display:'flex', alignContent:'space-between', flexDirection:'row', paddingTop:20}}>
-                            <Text style={styles.txt_24} >Fernando Farias</Text>
-
-                            <StarRating/>
-
-                        </View>
-                        {/*Comentário*/}
-                        <View style={styles.cell_view_vertical}>
-                            <Text style={styles.txt_24}>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            </Text>
-                        </View>
-                    </View>
                 </View>
 
             </View>
