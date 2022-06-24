@@ -2,38 +2,49 @@ from tkinter import *
 from My_Nb_Logic import *
 import datetime as dt
 
-
 class Janela():
     def __init__(self, root:Tk, agenda: Agenda, width, height):
         self.root = root
-        
-
         self.width=width
         self.height=height
         self.root.title('My Notebook')
         self.root.geometry(str(width)+'x'+str(height))
-    
-        self.agd = agenda
 
-        self.fr_menu = Frame(self.root)
+        self.pesquisa = StringVar()
+
+
+        self.agd = agenda
 
         self.curr_order = 0
         self.order = {}
-        self.menu_order = {}
+        self.order_for_menu = {}
 
-        self.order[0] = self.index()
-        self.order[1] = self.menu()
+        self.order[0] = self.pg_inicial()
+        self.order[1] = self.index()
+
+
+        for num, data in self.ordered_dates().items():
+            self.order[num] = self.pagina(self.agd.get_pg(data))
             
-        for num, date in self.num_to_date().items():
-            self.order[num] = self.pagina(self.agd.get_pg(date))
-            if self.agd.get_pg(date) in self.agd.get_titulos().values():
-                self.menu_order[date] = self.order[num]
-        
+
         self.order[0].pack()
         
         self.root.mainloop()
 
-    def index(self):
+
+    def ordered_dates(self):
+        num_to_date = {}
+        num = 1
+
+        for i in self.agd.get_all_pgs().keys():
+            num+=1
+            num_to_date[num] = i
+
+        return num_to_date
+
+
+
+    def pg_inicial(self):
 
         fr_conteudo = Frame(self.root)
 
@@ -43,46 +54,29 @@ class Janela():
         fundo.pack()
         return fr_conteudo
 
-    def login(self, usuario, senha):
-        pass
+    def index(self):
 
-    def menu(self):
-        fr_header = Frame(self.fr_menu, pady=10, width=self.width-20, height=50)
+        fr_menu = Frame(self.root)
+        fr_header = Frame(fr_menu, pady=10, width=self.width-20, height=50)
         lbl_menu = Label(fr_header, text='Index', font=('Arial', 15, 'normal'))
         lbl_menu.pack( side='left')
         line = Frame(fr_header, bg='black', width=600, height=2)
         line.pack(side='right', padx=10)
         fr_header.pack()
 
-        titulos = self.agd.get_titulos()
+        fr_pesquisar = Frame(fr_menu)
+        Label(fr_pesquisar, text='Pesquisar: ')
+        txt_pesquisar = Entry(fr_pesquisar, font=('Arial', 15, 'normal'), textvariable=self.pesquisa)
+        bt_pesquisar = Button(fr_pesquisar, text='Ir', command=self.go_to, width=2)
+        txt_pesquisar.pack(side=LEFT, padx=1)
+        bt_pesquisar.pack(side=RIGHT)
+        fr_pesquisar.pack()
 
-        for titulo, pagina in titulos.items():
-            fr_label = Frame(self.fr_menu)
-            label = Label(fr_label, text=f"{pagina.get_data_string()} - {str(titulo)}", font=('Arial', 15, 'normal'))
-            label.bind('<Button-1>', lambda evt : self.go_to_pg(evt, pagina.get_data_string()))
-            label.pack()
-            fr_label.pack()
-
-        return self.fr_menu
-
-    def go_to_pg(self, evt, data):
-        self.order[self.curr_order].pack_forget()
-
-        for num, frame in self.order.items():
-            if frame == self.menu_order[data]:
-                self.curr_order = num
-
-        self.order[self.curr_order].pack()
-
-    def go_to_menu(self, evt):
-        self.order[self.curr_order].pack_forget()
-        self.curr_order = 1
-        self.order[self.curr_order].pack()
+        return fr_menu
 
     def pagina(self, pagina : Pagina):
 
         fr_conteudo = Frame(self.root)
-
 
         fr_data = Frame(fr_conteudo, pady=10, width=self.width-20, height=50)
         lbl_data = Label(fr_data, text=pagina.get_data_string(), font=('Arial', 15, 'normal'))
@@ -95,10 +89,11 @@ class Janela():
         txt_input.pack()
         return fr_conteudo
 
+
     def mudar_pg(self, evt):
 
         if evt.keysym == "Right":
-            if self.curr_order == 365:
+            if self.curr_order == 367:
                 pass
             else:
                 self.order[self.curr_order].pack_forget()
@@ -112,44 +107,23 @@ class Janela():
                 self.order[self.curr_order].pack_forget()
                 self.curr_order-=1
                 self.order[self.curr_order].pack()
+    
+    def go_to(self):
+        for num, date in self.ordered_dates().items():
+            if date == self.pesquisa.get():
+                self.order[self.curr_order].pack_forget()
+                self.curr_order = num
+                self.order[self.curr_order].pack()
+    
+    def go_to_menu(self, evt):
+        self.order[self.curr_order].pack_forget()
+        self.curr_order = 1
+        self.order[self.curr_order].pack()
 
-    def num_to_date(self):
-        num_to_date = {}
-        num = 1
-        ano = self.agd.get_ano()
-        for mes in range(12):
-            mes +=1
-            if mes == 2:
 
-                if (ano%4==0 or ano%400==0) and ano%100!=0:
-                    dias=29
-                else:
-                    dias=28
-                for dia in range(dias):
-                    num+=1
-                    dia +=1
-                    data = dt.datetime.strptime(f"{dia}/{mes}/{ano}", "%d/%m/%Y").strftime("%d/%m/%Y")
-                    num_to_date[num] = data
-            elif mes == 4 or mes == 6 or mes == 9 or mes == 11:
-                for dia in range(30):
-                    num+=1
-                    dia +=1
-                    data = dt.datetime.strptime(f"{dia}/{mes}/{ano}", "%d/%m/%Y").strftime("%d/%m/%Y")
-                    num_to_date[num] = data
-            else:
-                for dia in range(31):
-                    num+=1
-                    dia +=1
-                    data = dt.datetime.strptime(f"{dia}/{mes}/{ano}", "%d/%m/%Y").strftime("%d/%m/%Y")
-                    num_to_date[num] = data
-        return num_to_date
+
 
 my_agenda = Agenda('Pedro', '123', 2022)
-
-my_agenda.write('10/11/2022', 'Hello World!')
+my_agenda.write('27/06/'+str(my_agenda.get_ano()), 'TKinter é um saco!!!!!! \n\n nota para o Belone: 0')
 
 jan = Janela(Tk(), my_agenda,738, 806)
-
-""" print(jan.num_to_date()) """
-""" print(jan.order) """
-""" print(jan.order[0]) """
