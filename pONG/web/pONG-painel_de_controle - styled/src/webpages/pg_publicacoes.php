@@ -104,7 +104,7 @@
             
                 while($row = $query->fetch_assoc()){
                     echo "<div name='publi-".$row['id']."' id='publi-".$row['id']."' class='publi_item' >
-                    <div>".$row['titulo']."</div><div>".$row['datetime_publicacao']."</div></div><br>";
+                    <p>".$row['titulo']."</p><p>".$row['datetime_publicacao']."</p></div><br>";
                 }
             }
             
