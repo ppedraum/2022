@@ -6,11 +6,6 @@
 
     <script>
 
-        /* function delArrIndex(selId) {
-        let select = document.getElementById(selId);
-        select.remove(select[0]);
-        } */
-
         function mudarForm(){
             
             if(document.getElementById('rd_tipo_publicacao_publicacao').checked){
@@ -32,23 +27,42 @@
             
         }
 
-
-
     </script>
+
+    <?php
+    
+    require_once('../php_stuff/datab.php');
+
+    $sel_tipo_evento = mysqli_query($conn, 'select * from tipo_evento');
+    $sel_cargo_voluntario = mysqli_query($conn, 'select * from cargo_voluntario')
+    ?>
+
     <style>
         #sct_tipo_publicacao span{
             margin-inline: 10px;
         }
     </style>
+    <link rel="stylesheet" href="../styles.css">
 </head>
 
 <body onload="mudarForm()">
+    
+    <header class='header' >
+        <p class='txt_title' ><a href="../../menu.php"> pONG </a>- Gerenciar Publicações...</p>
+        <div id="profile">
+            <img src="../images/satc.jpg" class='logo_ong' alt="logo da ONG">
+            <p class='txt_default' >SATC</p>
+            <a href="#"><p>Gerenciar perfil...</p></a>
+        </div>
+        
+    </header>
 
-    <form method="post" action="">
+    <!-- action="../php_stuff/add_publicacao.php"  -->
+    <form method="post" enctype="multipart/form-data" action="../php_stuff/add_publicacao.php" >
 
         
-        Titulo<br><input type="text" id="txt_titulo"><br>
-        Descrição<br><input type="text" id="txt_descricao"><br><br>
+        Titulo<br><input type="text" id="txt_titulo" name='txt_titulo'><br>
+        Descrição<br><input type="text" id="txt_descricao" name='txt_descricao'><br><br>
 
         <section id="sct_tipo_publicacao">
             <span>
@@ -70,11 +84,14 @@
                 <div>
                     <label for="sel_tipo_evento">Tipo de Evento</label><br>
                     <select name="sel_tipo_evento" id="sel_tipo_evento">
-                        <option value="arrecadacao">Arrecadação</option>
-                        <option value="divulgacao">Divulgação</option>
-                        <option value="palestras">Palestras</option>
-                        <option value="reunioes">Reuniões</option>
-                        <option value="outros">Outros</option>
+                        
+                        <?php
+                        
+                        while($row = $sel_tipo_evento->fetch_assoc()){
+                            echo "<option value=".$row['id'].">".$row['titulo']."</option>";
+                        }
+                        ?>
+
                     </select>
                 </div>
                 <div>
@@ -89,7 +106,7 @@
                     <label for="sel_estado_evento">Estado</label><br>
                     <select name="sel_estado_evento" id="sel_estado_evento" 
                     onmousedown="/* delArrIndex('sel_estado_evento') */">
-                        <option value="null" selected>Selecione...</option>
+                        <option value="nl" selected>Selecione...</option>
                         <option value="AC">Acre</option>
                         <option value="AL">Alagoas</option>
                         <option value="AP">Amapá</option>
@@ -139,25 +156,23 @@
 
         <div id="div_form_requisicao" hidden>
             <!-- <form action="" method="post"> -->
-                Foto: <input type="file" name="file_foto" id="file_foto"><br>
-                Qtd. de requisições: <input type="text" id="txt_qtd_requisicoes"><br>
+                Qtd. de requisições: <input type="text" name="txt_qtd_requisicoes" id="txt_qtd_requisicoes"><br>
                 Cargo Procurado:
-                <select name="sel_cargo_procurado" id="sel_cargo_procurado">
-                    <option value="secretário">secretário</option>
-                    <option value="Cozinheiro">Cozinheiro</option>
-                    <option value="Faxineiro">Faxineiro</option>
-                    <option value="Fisioterapeuta">Fisioterapeuta</option>
-                    <option value="Psicólogo">Psicólogo</option>
+                <select name="sel_cargo_voluntario" id="sel_cargo_voluntario">
+                    <?php
+                        while($row = $sel_cargo_voluntario->fetch_assoc()){
+                            echo "<option value=".$row['id'].">".$row['nome']."</option>";
+                        }
+                    ?>
                 </select>
             <!-- </form> -->
         </div>
         <div>
             <input type="submit" name="bt_submit_publicacao" id="bt_submit_publicacao" value="Enviar">
-            <input type="reset" name="bt_submit_publicacao" id="bt_reset_publicacao" value="Resetar">
+            <input type="reset" name="bt_submit_publicacao" id="bt_reset_publicacao" value="Resetar" onclick="">
         </div>
         
 
     </form>
-
 </body>
 </html>

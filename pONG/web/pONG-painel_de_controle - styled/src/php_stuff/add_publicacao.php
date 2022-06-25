@@ -6,7 +6,7 @@ date_default_timezone_set('America/Sao_Paulo');
 require_once ('datab.php');
 
 session_start();
-$id_ONG = /* $_SESSION['id_ong']; */ 1;
+$id_ONG = 1;
 
 $titulo = $_POST['txt_titulo'];
 $descricao = $_POST['txt_descricao'];
@@ -151,13 +151,11 @@ if(isset($_POST['bt_submit_publicacao'])){
 
 if (mysqli_query($conn, $query_publicacao)) {
     debug_log( "Valores alterados com sucesso!");
-    
 } else {
-    echo($query_publicacao);
     debug_log( "Erro: ".$query_publicacao."<br>".mysqli_error($conn));
 }
 mysqli_close($conn); 
-header('Location:../webpages/pg_publicacoes.php');
+echo "<script>window.location.assign('../webpages/pg_publicacoes.php')</script>";
 
 ?>
 
