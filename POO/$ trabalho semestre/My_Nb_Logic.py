@@ -10,10 +10,13 @@ class Pagina:
         self.data=data
         self.conteudo = ''
 
+
     def get_data(self):
         return self.data
+
     def get_data_string(self):
-        return self.data.strftime('%d/%m/%Y')
+        data = self.get_data().strftime('%d/%m/%Y')
+        return data
 
     def get_conteudo(self):
         return self.conteudo
@@ -38,9 +41,10 @@ class Agenda:
         self.paginas = {}
         self.criar_agenda()
 
-        self.storage = {}
-        self.get_dados_bd()
-        self.inject_dados_bd()
+        self.database = Database()
+
+        for data, text in self.database.database_read().items():
+            self.write(data, text)
 
     '''Função que dá origem a agenda em si'''
     def criar_agenda(self):
@@ -69,15 +73,6 @@ class Agenda:
                     data = dt.date(self.ano, mes, dia)
                     self.paginas[data.strftime('%d/%m/%Y')] = Pagina(data)
 
-    def get_dados_bd(self):
-        file = open('randomjson.json')
-        dados = json.load(file)
-        for data, texto in dados.items():
-            self.storage[data] = texto
-
-    def inject_dados_bd(self):
-        for data, texto in self.storage.items():
-            self.write(data, texto)
 
     def write(self, data, conteudo):
         self.paginas[data].set_conteudo(conteudo)
@@ -89,12 +84,27 @@ class Agenda:
         return self.paginas
     def get_ano(self):
         return self.ano
-    
 
+    def get_db(self):
+        return self.database
 
-""" agenda = Agenda('Pedro', '123', 2004)
-agenda.criar_agenda()
-agenda.add_index('19/01/2004', 'Isa')
-agenda.write('19/01/2004', 'Aniversário da Isa! <3')
-print(agenda.index['Isa'].conteudo)
-print(agenda.paginas) """
+class Database:
+    def __init__(self):
+        self.resources = {}
+
+    def database_write(self, data):
+        db = open('./database.json', 'w', encoding='utf-8')
+        with db as db:
+            db.write(json.dumps(data))
+        db.close()
+
+    def database_read(self):
+        db_read = open('./database.json', 'r', encoding='utf-8')
+        content = db_read.read()
+        self.resources = json.loads(content)
+        db_read.close()
+        return self.resources
+
+agd = Agenda('pedro', 123, 2022)
+agd.write('01/01/2022', 'today i ate lemon')
+agd.write('02/01/2022', 'it was good.')
