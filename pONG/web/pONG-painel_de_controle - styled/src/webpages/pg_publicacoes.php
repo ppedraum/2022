@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../styles_.css">
     <?php
     require_once('../php_stuff/datab.php');
 
@@ -18,7 +18,7 @@
 <body>
 
     <header class='header' >
-        <p class='txt_title' ><a href="../../menu.php"> pONG </a>- Gerenciar Publicações...</p>
+        <p class='txt_title' ><a href="../../menu.php"> MUNDO </a>- Gerenciar Publicações...</p>
         <div id="profile">
             <img src="../images/satc.jpg" class='logo_ong' alt="logo da ONG">
             <p class='txt_default' >SATC</p>
@@ -73,7 +73,7 @@
                 while($row = $query->fetch_assoc()){
 
                     echo "<div name='publi-".$row['id']."' id='publi-".$row['id']."' class='publi_item' >
-                    <div>".$row['titulo']."</div><div>".$row['datetime_publicacao']."</div></div><br>";
+                    <div class='publi_text'>".$row['titulo']."</div><div class='publi_date' >".$row['datetime_publicacao']."</div></div><br>";
                 }
             }
             else{

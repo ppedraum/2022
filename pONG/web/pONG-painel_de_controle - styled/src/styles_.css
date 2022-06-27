@@ -1,6 +1,6 @@
 body{
     background-color: #52A5E0;
-    color: white;
+    color: black;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14pt;
     display: flex;
@@ -9,7 +9,7 @@ body{
 }
 
 a{
-    color: white;
+    color: black;
 }
 
 .header{
@@ -22,7 +22,7 @@ a{
 }
 
 .txt_default, .txt_title {
-    color:white;
+    color:black;
 }
 
 .txt_title{
@@ -105,9 +105,32 @@ input[type=checkbox], input[type=radio]{
 
 .publi_item{
     display: flex;
-    width: auto;
+    width: 40vw;
     justify-content: space-between;
     background-color: white;
     margin: 0 10px 0 10px;
     padding: 5px 10px 5px 10px;
+}
+.publi_text{
+    width:45%;
+    flex-grow: 2;
+    word-wrap: break-word;
+}
+.publi_date{
+    width:45%;
+    flex-grow: 1;
+    text-align: right;
+}
+
+#div_form_requisicao input[type=text]{
+    width:3ch;
+    height:3ch;
+    text-align: center;
+    overflow: hidden;
+    
+}
+form div{
+    margin-bottom: 10px;
+    margin-top: 20px;
+    
 }

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>pONG - Painel de Controle</title>
+    <title>MUNDO - Painel de Controle</title>
 
     <script>
 
@@ -42,13 +42,13 @@
             margin-inline: 10px;
         }
     </style>
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../styles_.css">
 </head>
 
 <body onload="mudarForm()">
     
     <header class='header' >
-        <p class='txt_title' ><a href="../../menu.php"> pONG </a>- Gerenciar Publicações...</p>
+        <p class='txt_title' ><a href="../../menu.php"> MUNDO </a>- Gerenciar Publicações...</p>
         <div id="profile">
             <img src="../images/satc.jpg" class='logo_ong' alt="logo da ONG">
             <p class='txt_default' >SATC</p>
@@ -60,10 +60,13 @@
     <!-- action="../php_stuff/add_publicacao.php"  -->
     <form method="post" enctype="multipart/form-data" action="../php_stuff/add_publicacao.php" >
 
+        <div>
+            Titulo<br><input type="text" id="txt_titulo" name='txt_titulo'>
+        </div>
+        <div>
+            Descrição<br><input type="text" id="txt_descricao" name='txt_descricao'>
+        </div>
         
-        Titulo<br><input type="text" id="txt_titulo" name='txt_titulo'><br>
-        Descrição<br><input type="text" id="txt_descricao" name='txt_descricao'><br><br>
-
         <section id="sct_tipo_publicacao">
             <span>
                 <label for="rd_tipo_publicacao_publicacao">Publicação</label>
@@ -156,15 +159,21 @@
 
         <div id="div_form_requisicao" hidden>
             <!-- <form action="" method="post"> -->
-                Qtd. de requisições: <input type="text" name="txt_qtd_requisicoes" id="txt_qtd_requisicoes"><br>
-                Cargo Procurado:
-                <select name="sel_cargo_voluntario" id="sel_cargo_voluntario">
-                    <?php
-                        while($row = $sel_cargo_voluntario->fetch_assoc()){
-                            echo "<option value=".$row['id'].">".$row['nome']."</option>";
-                        }
-                    ?>
-                </select>
+                <div>
+                    Qtd. de requisições: <input type="text" name="txt_qtd_requisicoes" id="txt_qtd_requisicoes"><br>
+                </div>
+                
+                <div>
+                    Cargo Procurado:
+                    <select name="sel_cargo_voluntario" id="sel_cargo_voluntario">
+                        <?php
+                            while($row = $sel_cargo_voluntario->fetch_assoc()){
+                                echo "<option value=".$row['id'].">".$row['nome']."</option>";
+                            }
+                        ?>
+                    </select>
+                </div>
+                
             <!-- </form> -->
         </div>
         <div>

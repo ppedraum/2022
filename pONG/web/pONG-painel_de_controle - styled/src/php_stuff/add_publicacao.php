@@ -80,8 +80,9 @@ if(isset($_POST['bt_submit_publicacao'])){
             '$date_fim_evento $hor_fim_evento:00',
             0,
             '$imgContent',
-            $id_ONG,
-            $id_tipo_evento
+            $id_tipo_evento,
+            $id_ONG
+            
         ) ";
 
         if (mysqli_query($conn, $query_evento)) {
