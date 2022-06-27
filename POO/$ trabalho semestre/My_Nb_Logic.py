@@ -32,9 +32,7 @@ class Pagina:
 class Agenda:
 
     '''Começa setando um usuário, senha e ano para a agenda'''
-    def __init__(self, usuario, senha, ano):
-        self.usuario=usuario
-        self.senha=senha
+    def __init__(self, ano):
         self.ano=ano
 
         '''Array com todas as páginas'''
@@ -92,10 +90,10 @@ class Database:
     def __init__(self):
         self.resources = {}
 
-    def database_write(self, data):
+    def database_write(self, dados):
         db = open('./database.json', 'w', encoding='utf-8')
         with db as db:
-            db.write(json.dumps(data))
+            db.write(json.dumps(dados))
         db.close()
 
     def database_read(self):
@@ -104,7 +102,3 @@ class Database:
         self.resources = json.loads(content)
         db_read.close()
         return self.resources
-
-agd = Agenda('pedro', 123, 2022)
-agd.write('01/01/2022', 'today i ate lemon')
-agd.write('02/01/2022', 'it was good.')

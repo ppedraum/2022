@@ -14,7 +14,7 @@ class Janela():
         self.pesquisa = StringVar()
 
         self.agd = agenda
-        self.db = agd.get_db()
+        self.db = self.agd.get_db()
 
         self.curr_order = 0
         self.order = {}
@@ -129,8 +129,8 @@ class Janela():
         for data, pagina in self.agd.get_all_pgs().items():
             ctt[data] = pagina.get_conteudo()
         self.db.database_write(ctt)
-        if messagebox.askokcancel("Quit", "Do you want to quit?"):
-            messagebox.showinfo('Saving...', 'Data Saved!')
+        if messagebox.askokcancel("Quit", "Você quer sair?"):
+            messagebox.showinfo('Saving...', 'Dados Salvos!')
             self.root.destroy()
             
 
@@ -157,12 +157,10 @@ class Frame_Pagina:
         return self.fr_conteudo
 
 
-            
 
 
 
-my_agenda = Agenda('Pedro', '123', 2022)
-my_agenda.write('27/06/'+str(my_agenda.get_ano()), 'TKinter é um saco!!!!!! \n\n nota para o Belone: 0')
+my_agenda = Agenda(2022)
 
 jan = Janela(Tk(), my_agenda,738, 806)
 
