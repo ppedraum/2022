@@ -56,7 +56,10 @@
                 <table id='table_publi'>
                     <tr>
                         <th>Título</th>
+                        <th>Likes</th>
+                        <th>Compart.</th>
                         <th>Data</th>
+                        
                     </tr>
                     <?php
 
@@ -68,6 +71,12 @@
                                 <tr name='publi-".$row['id']."' id='publi-".$row['id']."'>
                                     <td>"
                                         .$row['titulo']."
+                                    </td>
+                                    <td>"
+                                        .$row['qtd_likes']."
+                                    </td>
+                                    <td>"
+                                        .$row['qtd_compartilhamentos']."
                                     </td>
                                     <td>"
                                         .$row['datetime_publicacao']."
@@ -104,8 +113,14 @@
                             while($row = $query->fetch_assoc()){
                                 echo "
                                 <tr name='publi-".$row['id']."' id='publi-".$row['id']."'>
-                                    <td>"
+                                    <td onclick=\"window.location.assign('pg_view_publicacao.php/?n=2')\") >"
                                         .$row['titulo']."
+                                    </td>
+                                    <td>"
+                                        .$row['qtd_likes']."
+                                    </td>
+                                    <td>"
+                                        .$row['qtd_compartilhamentos']."
                                     </td>
                                     <td>"
                                         .$row['datetime_publicacao']."

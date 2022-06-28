@@ -56,7 +56,7 @@
         
         Titulo<br><input type="text" id="txt_titulo" name='txt_titulo'><br>
         Descrição<br>
-        <textarea name="txt_descricao" id="txt_descricao" cols="30" rows="10"></textarea>
+        <textarea name="txt_descricao" id="txt_descricao" cols="30" rows="10" style='resize:none;' ></textarea>
 
         <section id="sct_tipo_publicacao">
             <span>
