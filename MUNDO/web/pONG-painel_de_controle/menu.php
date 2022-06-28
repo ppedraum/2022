@@ -7,7 +7,7 @@
     <title>Painel de Controle - pONG</title>
 </head>
 <body>
-    <?php session_start(); echo("olá, ".$_SESSION['id_ong']); ?>
+    <?php session_start(); echo("olá, ".$_SESSION['login']); ?>
     <br><br>
     <p>pONG - Painel de Controle</p>
     <br><br><br>

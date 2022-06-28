@@ -47,9 +47,7 @@
 <body onload="mudarForm()">
     
     <header>
-        <br><br>
-        <p><a href="../../menu.php"> pONG </a>- Adicionar Publicação...</p>
-        <br><br>
+        <p><a href="../../menu.php"> Mundo </a>- Adicionar Publicação...</p>
     </header>
 
     <!-- action="../php_stuff/add_publicacao.php"  -->
@@ -57,7 +55,8 @@
 
         
         Titulo<br><input type="text" id="txt_titulo" name='txt_titulo'><br>
-        Descrição<br><input type="text" id="txt_descricao" name='txt_descricao'><br><br>
+        Descrição<br>
+        <textarea name="txt_descricao" id="txt_descricao" cols="30" rows="10"></textarea>
 
         <section id="sct_tipo_publicacao">
             <span>
@@ -91,11 +90,11 @@
                 </div>
                 <div>
                     <label for="txt_endereco_evento">Endereço</label><br>
-                    <input type="text" name="txt_endereco_evento" id="txt_endereco_evento" value="Rua, Número, Bairro, Referência" onmousedown="this.setAttribute('value', '')">
+                    <input type="text" name="txt_endereco_evento" id="txt_endereco_evento" placeholder="Rua, Número, Bairro, Referência">
                 </div>
                 <div>
                     <label for="txt_cidade_evento">Cidade</label><br>
-                    <input type="text" name="txt_cidade_evento" id="txt_cidade_evento" value="Cidade" onmousedown="this.setAttribute('value', '')">
+                    <input type="text" name="txt_cidade_evento" id="txt_cidade_evento" placeholder="Cidade">
                 </div>
                 <div>
                     <label for="sel_estado_evento">Estado</label><br>
