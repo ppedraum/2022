@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Mundo - Gerenciar Publicações</title>
 
     <?php
     require_once('../php_stuff/datab.php');
@@ -12,7 +12,7 @@
     $inst = mysqli_query($conn, 'select nome_fantasia, id from ONG');
 
     ?>
-    <link rel="stylesheet" href="./styles.css">
+    <!-- <link rel="stylesheet" href="./styles.css"> -->
     <script type="text/javascript" src="../scripts/pg_publicacoes.js"></script>
 </head>
 <body>
@@ -21,17 +21,17 @@
     </header>
     <div id='conteudo'>
         <div id='sct_ger_publicacoes'>
-            <form method='post'>
+            <form method='get'>
 
                 <div id='sct_txt_pesquisa'>
                     Pesquisar <input type="text" name='txt_pesquisar_publicacoes' id='txt_pesquisar_publicacoes'>
                 </div>
                 
-                <div >
+                <div class='filtros' >
                     <div id='filtro_tipo'>
 
+                        <input type="checkbox" name="ch_filtro_tipo" id="ch_filtro_tipo" onclick="isFiltroChecked( this['id'], 'sel_tipo_publicacao')">
                         <label for="ch_filtro_tipo">Tipo</label>
-                        <input type="checkbox" name="ch_filtro_tipo" id="ch_filtro_tipo" onclick="isFiltroChecked( this['id'], 'sel_tipo_publicacao')"><br>
                         <select name="sel_tipo_publicacao" id="sel_tipo_publicacao" hidden>
                             <option value="PUBLICACAO">PUBLICAÇÃO</option>
                             <option value="REQUISICAO">REQUISIÇÃO</option>
@@ -40,11 +40,11 @@
                     </div>
                     <div id='filtro_data'>
                         <div>
+                            <input type="checkbox" name="ch_filtro_data" id="ch_filtro_data" onclick="isFiltroChecked('ch_filtro_data', 'dt_publicacao')">
                             <select name="sel_filtro_data" id="sel_filtro_data">
                                 <option value="depois" default>Depois de...</option>
                             </select>
-                            <input type="checkbox" name="ch_filtro_data" id="ch_filtro_data" onclick="isFiltroChecked('ch_filtro_data', 'dt_publicacao')"><br>
-                            <input type="date" name="dt_publicacao" id="dt_publicacao" hidden><br>
+                            <input type="date" name="dt_publicacao" id="dt_publicacao" hidden>
                         </div>
                     </div>
                 </div>
@@ -58,12 +58,14 @@
                         <th>Título</th>
                         <th>Likes</th>
                         <th>Compart.</th>
+                        <th>Tipo</th>
                         <th>Data</th>
+                        
                         
                     </tr>
                     <?php
 
-                        if(!isset($_POST['bt_pesquisar_publicacao'])){
+                        if(!isset($_GET['bt_pesquisar_publicacao'])){
                             $query = mysqli_query($conn, "select * from Publicacao order by datetime_publicacao desc");
                             
                             while($row = $query->fetch_assoc()){
@@ -79,19 +81,27 @@
                                         .$row['qtd_compartilhamentos']."
                                     </td>
                                     <td>"
+                                        .$row['tipo_publicacao']."
+                                    </td>
+                                    <td>"
                                         .$row['datetime_publicacao']."
-                                    </td>    
+                                    </td> 
+                                    <td onclick='alert(\"Você precisa aprender:\n
+                                                        Como passar parâmetros via GET request\n
+                                                        (redes) \")' >
+                                    Excluir
+                                    </td>   
                                 </tr>";
                             }
                         }
                         else{
-                            $txt_titulo = $_POST['txt_pesquisar_publicacoes'];
+                            $txt_titulo = $_GET['txt_pesquisar_publicacoes'];
                             $query = "select * from Publicacao where titulo like '%$txt_titulo%' ";
-                            $ch_filtro_tipo = isset($_POST['ch_filtro_tipo']) ? true : false ;
-                            $ch_filtro_data = isset($_POST['ch_filtro_data']) ? true : false ;
+                            $ch_filtro_tipo = isset($_GET['ch_filtro_tipo']) ? true : false ;
+                            $ch_filtro_data = isset($_GET['ch_filtro_data']) ? true : false ;
                             
-                            $sel_tipo_publicacao = $_POST['sel_tipo_publicacao'];
-                            $dt_publicacao = $_POST['dt_publicacao'];
+                            $sel_tipo_publicacao = $_GET['sel_tipo_publicacao'];
+                            $dt_publicacao = $_GET['dt_publicacao'];
 
                             if($dt_publicacao == ''){
                                 $dt_publicacao = date('0000-00-00');
@@ -113,7 +123,7 @@
                             while($row = $query->fetch_assoc()){
                                 echo "
                                 <tr name='publi-".$row['id']."' id='publi-".$row['id']."'>
-                                    <td onclick=\"window.location.assign('pg_view_publicacao.php/?n=2')\") >"
+                                    <td>"
                                         .$row['titulo']."
                                     </td>
                                     <td>"
@@ -123,8 +133,18 @@
                                         .$row['qtd_compartilhamentos']."
                                     </td>
                                     <td>"
+                                        .$row['tipo_publicacao']."
+                                    </td>
+                                    <td>"
                                         .$row['datetime_publicacao']."
-                                    </td>    
+                                    </td>
+
+                                    <td onclick='alert(\"Você precisa aprender:
+                                                        Como passar parâmetros via GET request
+                                                        (redes) \")' >
+                                    Excluir
+                                    </td>
+                                    
                                 </tr>";
                             }
                         }

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>pONG - Painel de Controle</title>
+    <title>Mundo - Adicionar Publicação</title>
 
     <script>
 
