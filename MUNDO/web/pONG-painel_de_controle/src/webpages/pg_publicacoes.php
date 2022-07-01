@@ -12,7 +12,7 @@
     $inst = mysqli_query($conn, 'select nome_fantasia, id from ONG');
 
     ?>
-    <!-- <link rel="stylesheet" href="./styles.css"> -->
+    <link rel="stylesheet" href="./styles_.css">
     <script type="text/javascript" src="../scripts/pg_publicacoes.js"></script>
 </head>
 <body>
